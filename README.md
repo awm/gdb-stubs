@@ -18,6 +18,7 @@ The following tools are required or recommended for building the framework:
  * CMake >= 3.5 (optional, recommended build system generator).
  * Ninja >= 1.8 (optional, recommended build system).
  * Sphinx >= 3.4 (optional, for generating documentation).
+ * Read the Docs Sphinx Theme >= 0.5 (optional, for generating documentation).
 
 ## Building
 

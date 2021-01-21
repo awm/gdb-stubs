@@ -1,0 +1,17 @@
+#
+# @file      CMakeLists.txt
+# @copyright 2021 Sierra Wireless Inc.
+#
+# @remark
+#     SPDX-License-Identifier: MPL-2.0
+#
+# @brief     Unit tests for GDB stub implementation.
+#
+include_directories(
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/source
+)
+
+# First, a basic sanity of tap.h itself.
+add_executable(test_tap_sanity test_tap_sanity.c)
+add_test(test_tap_sanity test_tap_sanity)

@@ -32,6 +32,6 @@ include_directories(
 # Subdirectories
 add_subdirectory(source)
 add_subdirectory(documentation)
-# if (BUILD_TESTING)
-#     add_subdirectory(test/unit)
-# endif()
+if (NOT CMAKE_CROSSCOMPILING)
+    add_subdirectory(tests/unit)
+endif()
