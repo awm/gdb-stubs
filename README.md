@@ -37,7 +37,7 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/${target}.cmake -G Ninja ..
 # Build the library
 ninja
 ```
-The resulting static library will be located in `${target}-build/lib`.
+The resulting static library will be located in `${target}-build/source`.
 
 Use of the CMake project is not mandatory, and if necessary the required stub code source files may
 be directly incorporated into your own project's build mechanism.
