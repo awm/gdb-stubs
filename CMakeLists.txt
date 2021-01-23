@@ -16,6 +16,12 @@ set(CMAKE_C_STANDARD 99)
 project(gdb-stubs VERSION 0.1.0 LANGUAGES C)
 
 include(CTest)
+include(CheckSymbolExists)
+
+# Test for platform features.
+check_symbol_exists(memcpy  "string.h"  HAVE_MEMCPY)
+check_symbol_exists(memset  "string.h"  HAVE_MEMSET)
+check_symbol_exists(strncmp "string.h"  HAVE_STRNCMP)
 
 # Turn on all warnings and treat all warnings as errors.
 set(GNU_LIKE GNU Clang AppleClang)
