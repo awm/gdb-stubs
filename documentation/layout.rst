@@ -12,9 +12,9 @@ documentation
 include
     C header files defining the two main interfaces which are used by a GDB stub:
 
-        * The externally facing API (``gdbstub.h``) which must be called from the user's embedded
-          application in order to initialize and run the stub.
-        * The internal API (``gdbdevice.h``) which must be implemented by the user's application in
+        * The externally facing API (:ref:`api-functions`) which must be called from the user's
+          embedded application in order to initialize and run the stub.
+        * The internal API (:ref:`api-hooks`) which must be implemented by the user's application in
           order to hook the stub into the appropriate I/O and debug hardware for the device.
 
 source

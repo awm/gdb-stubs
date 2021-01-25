@@ -26,7 +26,9 @@ Distributed under the terms of the :doc:`license`.
    :maxdepth: 2
    :caption: Contents
 
+   getting-started
    layout
+   api
    license
 
 Indices and Tables

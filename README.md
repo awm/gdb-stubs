@@ -13,12 +13,17 @@ debug environment, and hooks for debugging actions and I/O operations.
 
 The following tools are required or recommended for building the framework:
 
- * **A C99-compliant C compiler for your target platform (required).**
- * A C99-compliant C compiler and linker for your development host (optional, for unit tests).
- * CMake >= 3.5 (optional, recommended build system generator).
- * Ninja >= 1.8 (optional, recommended build system).
- * Sphinx >= 3.4 (optional, for generating documentation).
- * Read the Docs Sphinx Theme >= 0.5 (optional, for generating documentation).
+ * **Required, for target build:**
+   * A C99-compliant C compiler for your target platform.
+ * **Recommended, for host build and unit tests:**
+   * A C99-compliant C compiler and linker for your development host.
+   * CMake >= 3.19.
+   * Ninja >= 1.8.
+ * **Optional, for documentation generation:**
+   * Sphinx >= 3.4.
+   * Read the Docs Sphinx Theme >= 0.5.
+   * Doxygen >= 1.8.
+   * Breathe >= 4.26.
 
 ## Building
 
@@ -64,7 +69,7 @@ ctest -V
 
 ## Documentation
 
-For more detailed documentation see [TBD].
+For more details see the generated documentation.
 
 The documentation is generated when running a build for the development host, as detailed above in
 the instructions for building the unit tests.
