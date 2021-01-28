@@ -13,7 +13,9 @@
 /// Possible error codes.
 enum gdbs_error
 {
-    GDBS_ERR_OK = 0, ///< No error.
+    GDBS_ERROR_OK = 0,    ///< No error.
+    GDBS_ERROR_INVALID,   ///< Invalid function input.
+    GDBS_ERROR_MALFORMED, ///< Malformed message.
 };
 
 /**
