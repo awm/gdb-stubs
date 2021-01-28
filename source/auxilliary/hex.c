@@ -80,3 +80,42 @@ int hex_octet_to_byte
     *byte = (high << 4) | low;
     return GDBS_ERROR_OK;
 }
+
+/**
+ * Convert a 4-bit nibble to a single hexadecimal digit.
+ *
+ * @return The converted hexadecimal digit [0-9A-F].
+ */
+static char nibble_to_hex_digit
+(
+    unsigned char nibble ///< Nibble to convert.  Only the 4 low-order bits are used.
+)
+{
+    assert(nibble <= 0xF);
+
+    if (nibble <= 0x9)
+    {
+        return '0' + (char) nibble;
+    }
+    else
+    {
+        return 'A' + (char) nibble - 10;
+    }
+}
+
+/**
+ * Convert a byte to a single text hexadecimal value.
+ */
+void byte_to_hex_octet
+(
+    unsigned char    byte,  ///< [in]  Byte to convert.
+    char            *buffer ///< [out] Buffer to write the hex value to.  Note that the result will
+                            ///<       NOT be automatically NUL-terminated.  The buffer is assumed
+                            ///<       to have space for two characters.
+)
+{
+    assert(buffer != NULL);
+
+    buffer[0] = nibble_to_hex_digit(byte >> 4);
+    buffer[1] = nibble_to_hex_digit(byte & 0xF);
+}

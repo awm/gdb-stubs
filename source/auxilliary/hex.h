@@ -24,4 +24,15 @@ int hex_octet_to_byte
     unsigned char   *byte    ///< [out] Byte to write the conversion value to.
 );
 
+/**
+ * Convert a byte to a single text hexadecimal value.
+ */
+void byte_to_hex_octet
+(
+    unsigned char    byte,  ///< [in]  Byte to convert.
+    char            *buffer ///< [out] Buffer to write the hex value to.  Note that the result will
+                            ///<       NOT be automatically NUL-terminated.  The buffer is assumed
+                            ///<       to have space for two characters.
+);
+
 #endif /* end HEX_H_ */
