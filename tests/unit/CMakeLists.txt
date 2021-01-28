@@ -19,3 +19,5 @@ add_test(test_tap_sanity test_tap_sanity)
 # Test the auxilliary functions.
 add_executable(test_auxilliary_checksum test_auxilliary_checksum.c)
 add_test(test_auxilliary_checksum test_auxilliary_checksum)
+add_executable(test_auxilliary_hex test_auxilliary_hex.c)
+add_test(test_auxilliary_hex test_auxilliary_hex)
