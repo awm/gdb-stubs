@@ -1,10 +1,10 @@
 /**
  *  @file       test_tap_sanity.c
  *  @copyright  2021 Sierra Wireless Inc.
- * 
+ *
  *  @remark
  *      SPDX-License-Identifier: MPL-2.0
- * 
+ *
  *  @brief      Test Anything Protocol header sanity test.
  */
 
