@@ -1,6 +1,7 @@
 # Build products
-/build
-/*-build
+*-build/
+_build/
+build/
 
 # Editor files
 /.vscode

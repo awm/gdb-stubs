@@ -30,7 +30,7 @@ unsigned char calculate_checksum
 
     for (i = 0; i < size; ++i)
     {
-        result += bytes[i];
+        accumulate_checksum(&result, bytes[i]);
     }
     return result;
 }

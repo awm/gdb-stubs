@@ -11,6 +11,18 @@
 #define CHECKSUM_H_
 
 /**
+ * Accumulate one more byte into a checksum value.
+ */
+static inline void accumulate_checksum
+(
+    unsigned char *checksum, ///< [in,out] Accumulating checksum value.
+    unsigned char  byte      ///< [in]     Value to add to the checksum.
+)
+{
+    *checksum += byte;
+}
+
+/**
  * Calculate a simple modulo-256 checksum of a data buffer.
  *
  * @return The calculated checksum.

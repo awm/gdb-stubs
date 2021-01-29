@@ -12,7 +12,29 @@
 /*********************************** Begin Test Implementation ************************************/
 #include "tap.h"
 
-static const unsigned long TEST_COUNT = 5;
+static const unsigned long TEST_COUNT = 5 + 5;
+
+static void test_accumulate_checksum(void)
+{
+    unsigned char checksum = 0;
+
+    TAP_DIAG("In %s", __func__);
+
+    accumulate_checksum(&checksum, 0x05);
+    TAP_OK(checksum == 0x05, "Test 0x05");
+
+    accumulate_checksum(&checksum, 0x8A);
+    TAP_OK(checksum == 0x8F, "Test 0x8F");
+
+    accumulate_checksum(&checksum, 0xB0);
+    TAP_OK(checksum == 0x3F, "Test 0x3F");
+
+    accumulate_checksum(&checksum, 0x01);
+    TAP_OK(checksum == 0x40, "Test 0x40");
+
+    accumulate_checksum(&checksum, 0xFF);
+    TAP_OK(checksum == 0x3F, "Test 0x3F (again)");
+}
 
 static void test_calculate_checksum(void)
 {
@@ -30,6 +52,7 @@ int main(void)
 {
     TAP_PLAN(TEST_COUNT);
 
+    test_accumulate_checksum();
     test_calculate_checksum();
 
     TAP_END_PLAN();
