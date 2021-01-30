@@ -10,6 +10,7 @@
 #include "hex.h"
 
 #include "gdbstub.h"
+
 #include "debug/debug.h"
 
 /**

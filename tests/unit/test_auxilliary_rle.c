@@ -12,7 +12,7 @@
 /*********************************** Begin Test Implementation ************************************/
 #include "tap.h"
 
-static const unsigned long TEST_COUNT = 94 + 216 + 8;
+static const unsigned long TEST_COUNT = 93 + 216 + 8;
 
 static void test_format_rle(void)
 {
@@ -32,7 +32,6 @@ static void test_format_rle(void)
     TFE('A', 4, "A*!", "4 repeats");
     TFE('A', 5, "A*\"", "5 repeats");
 
-    TFE('A', 8, "A*%", "8 repeats");
     TFE('A', 9, "A*&", "9 repeats");
     TFE('A', 10, "A*'", "10 repeats");
     TFE('A', 11, "A*(", "11 repeats");
@@ -150,7 +149,7 @@ static void test_encode(void)
     TE('z', 6, "z*\"", "Run of 6");
     TE('z', 7, "z*\"z", "Run of 7");
     TE('z', 8, "z*\"zz", "Run of 8");
-    TE('z', 9, "z*%", "Run of 9");
+    TE('z', 9, "z*\"zzz", "Run of 9");
     TE('z', 10, "z*&", "Run of 10");
     TE('z', 11, "z*'", "Run of 11");
     TE('z', 12, "z*(", "Run of 12");
@@ -248,7 +247,7 @@ static void test_encode(void)
     TE('z', 104, "z*~z*\"", "Run of 104");
     TE('z', 105, "z*~z*\"z", "Run of 105");
     TE('z', 106, "z*~z*\"zz", "Run of 106");
-    TE('z', 107, "z*~z*%", "Run of 107");
+    TE('z', 107, "z*~z*\"zzz", "Run of 107");
     TE('z', 108, "z*~z*&", "Run of 108");
     TE('z', 109, "z*~z*'", "Run of 109");
     TE('z', 110, "z*~z*(", "Run of 110");
@@ -346,7 +345,7 @@ static void test_encode(void)
     TE('z', 202, "z*~z*~z*\"", "Run of 202");
     TE('z', 203, "z*~z*~z*\"z", "Run of 203");
     TE('z', 204, "z*~z*~z*\"zz", "Run of 204");
-    TE('z', 205, "z*~z*~z*%", "Run of 205");
+    TE('z', 205, "z*~z*~z*\"zzz", "Run of 205");
     TE('z', 206, "z*~z*~z*&", "Run of 206");
     TE('z', 207, "z*~z*~z*'", "Run of 207");
     TE('z', 208, "z*~z*~z*(", "Run of 208");

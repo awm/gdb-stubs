@@ -10,6 +10,8 @@
 #include "rle.h"
 
 #include "gdbstub.h"
+
+#include "auxilliary/packet.h"
 #include "debug/debug.h"
 
 #define ENCODING_MIN_THRESHOLD 3    ///< No encoding is done for runs of this size or smaller.
@@ -30,12 +32,13 @@ static void format_rle
     assert(repeats <= ENCODING_MAX_THRESHOLD);
 
     destination[0] = value;
-    destination[1] = '*';
+    destination[1] = RLE_CHAR;
     destination[2] = (char) (repeats + '\x1D');
 
     assert(destination[2] >= ' ');
-    assert(destination[2] != '#');
-    assert(destination[2] != '$');
+    assert(destination[2] != PAYLOAD_END_CHAR);
+    assert(destination[2] != DATA_PACKET_START_CHAR);
+    assert(destination[2] != NOTIFICATION_PACKET_START_CHAR);
     assert(destination[2] <= '~');
 }
 
@@ -97,6 +100,18 @@ static unsigned long encode
             destination[4] = character;
 
             count += 5;
+            run = 0;
+        }
+        else if (run == 9)
+        {
+            // Runs of 9 characters are encoded using the normal RLE for 6, plus three extra
+            // instances of the character (due to % being reserved).
+            format_rle(destination, character, 6 - 1);
+            destination[3] = character;
+            destination[4] = character;
+            destination[5] = character;
+
+            count += 6;
             run = 0;
         }
         else if (run <= ENCODING_MAX_THRESHOLD)

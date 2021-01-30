@@ -10,6 +10,8 @@
 #ifndef RLE_H_
 #define RLE_H_
 
+#define RLE_CHAR '*' ///< Character used to denote an RLE value.
+
 /**
  * Run-length encode a buffer using the GDB protocol RLE scheme.
  */
