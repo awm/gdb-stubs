@@ -10,6 +10,7 @@
 
 # Stub library source files.
 set(SRCS
+    auxilliary/binary.c
     auxilliary/checksum.c
     auxilliary/hex.c
     auxilliary/rle.c
