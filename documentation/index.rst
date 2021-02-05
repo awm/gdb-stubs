@@ -1,7 +1,6 @@
-.. GDB Stubs documentation master file, created by
-   sphinx-quickstart on Wed Jan 20 09:12:04 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+..  GDB Stub Framework documentation entry point.
+    Copyright: 2021 Sierra Wireless Inc.
+    SPDX-License-Identifier: MPL-2.0
 
 GDB Stub Framework
 ==================

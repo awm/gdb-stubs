@@ -1,3 +1,14 @@
+#
+# @file      Doxyfile.in
+# @copyright 2021 Sierra Wireless Inc.
+#
+# @remark
+#     SPDX-License-Identifier: MPL-2.0
+#
+# @brief     Doxygen configuration template.  The final Doxyfile is generated and populated by
+#            CMake.
+#
+
 # Doxyfile 1.8.13
 
 # This file describes the settings to be used by the documentation system

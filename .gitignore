@@ -1,3 +1,13 @@
+#
+# @file      .gitignore
+# @copyright 2021 Sierra Wireless Inc.
+#
+# @remark
+#     SPDX-License-Identifier: MPL-2.0
+#
+# @brief     File patterns to exclude from version control.
+#
+
 # Build products
 *-build/
 _build/

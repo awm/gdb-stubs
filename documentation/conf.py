@@ -1,4 +1,11 @@
-# Configuration file for the Sphinx documentation builder.
+#
+# @file      conf.py
+# @copyright 2021 Sierra Wireless Inc.
+#
+# @remark
+#     SPDX-License-Identifier: MPL-2.0
+#
+# @brief      Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
 # list see the documentation:

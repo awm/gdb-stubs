@@ -1,11 +1,11 @@
 #
-# @file      CMakeLists.txt
+# @file      FindSphinx.cmake
 # @copyright 2021 Sierra Wireless Inc.
 #
 # @remark
 #     SPDX-License-Identifier: MPL-2.0
 #
-# @brief      Sphinx documentation generator module.
+# @brief      Sphinx documentation generator module for CMake.
 #
 include(FindPackageHandleStandardArgs)
 
