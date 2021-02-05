@@ -1,5 +1,5 @@
 /**
- *  @file       test_auxilliary_binary.c
+ *  @file       test_auxiliary_binary.c
  *  @copyright  2021 Sierra Wireless Inc.
  *
  *  @remark
@@ -7,7 +7,7 @@
  *
  *  @brief      Unit test cases for binary escaping implementation.
  */
-#include "auxilliary/binary.c"
+#include "auxiliary/binary.c"
 
 /*********************************** Begin Test Implementation ************************************/
 #include "tap.h"

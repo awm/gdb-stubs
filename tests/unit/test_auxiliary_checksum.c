@@ -1,5 +1,5 @@
 /**
- *  @file       test_auxilliary_checksum.c
+ *  @file       test_auxiliary_checksum.c
  *  @copyright  2021 Sierra Wireless Inc.
  *
  *  @remark
@@ -7,7 +7,7 @@
  *
  *  @brief      Unit test cases for checksum implementation.
  */
-#include "auxilliary/checksum.c"
+#include "auxiliary/checksum.c"
 
 /*********************************** Begin Test Implementation ************************************/
 #include "tap.h"

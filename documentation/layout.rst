@@ -25,8 +25,9 @@ source
     Platform-agnostic C source code implementing all of the GDB protocol, command handling and
     packet formatting.  This is further divided into:
 
-    auxilliary
-        Buffer manipulation and checksum routines.
+    auxiliary
+        Buffer manipulation and checksum routines.  Contains algorithms used for packet data
+        processing.
 
     debug
         Bare-bones debugging features for the stub code itself.

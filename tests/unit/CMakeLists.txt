@@ -16,12 +16,12 @@ include_directories(
 add_executable(test_tap_sanity test_tap_sanity.c)
 add_test(test_tap_sanity test_tap_sanity)
 
-# Test the auxilliary functions.
-add_executable(test_auxilliary_checksum test_auxilliary_checksum.c)
-add_test(test_auxilliary_checksum test_auxilliary_checksum)
-add_executable(test_auxilliary_hex test_auxilliary_hex.c)
-add_test(test_auxilliary_hex test_auxilliary_hex)
-add_executable(test_auxilliary_rle test_auxilliary_rle.c)
-add_test(test_auxilliary_rle test_auxilliary_rle)
-add_executable(test_auxilliary_binary test_auxilliary_binary.c)
-add_test(test_auxilliary_binary test_auxilliary_binary)
+# Test the auxiliary functions.
+add_executable(test_auxiliary_checksum test_auxiliary_checksum.c)
+add_test(test_auxiliary_checksum test_auxiliary_checksum)
+add_executable(test_auxiliary_hex test_auxiliary_hex.c)
+add_test(test_auxiliary_hex test_auxiliary_hex)
+add_executable(test_auxiliary_rle test_auxiliary_rle.c)
+add_test(test_auxiliary_rle test_auxiliary_rle)
+add_executable(test_auxiliary_binary test_auxiliary_binary.c)
+add_test(test_auxiliary_binary test_auxiliary_binary)

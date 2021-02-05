@@ -1,5 +1,5 @@
 /**
- *  @file       test_auxilliary_hex.c
+ *  @file       test_auxiliary_hex.c
  *  @copyright  2021 Sierra Wireless Inc.
  *
  *  @remark
@@ -7,7 +7,7 @@
  *
  *  @brief      Unit test cases for hexadecimal conversion functions.
  */
-#include "auxilliary/hex.c"
+#include "auxiliary/hex.c"
 
 /*********************************** Begin Test Implementation ************************************/
 #include "tap.h"

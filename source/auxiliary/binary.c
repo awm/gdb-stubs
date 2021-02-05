@@ -12,8 +12,8 @@
  */
 #include "binary.h"
 
-#include "auxilliary/packet.h"
-#include "auxilliary/rle.h"
+#include "auxiliary/packet.h"
+#include "auxiliary/rle.h"
 #include "debug/debug.h"
 
 /**

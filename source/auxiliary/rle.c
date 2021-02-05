@@ -11,7 +11,7 @@
 
 #include "gdbstub.h"
 
-#include "auxilliary/packet.h"
+#include "auxiliary/packet.h"
 #include "debug/debug.h"
 
 #define ENCODING_MIN_THRESHOLD 3    ///< No encoding is done for runs of this size or smaller.

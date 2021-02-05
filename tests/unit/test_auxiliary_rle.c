@@ -1,5 +1,5 @@
 /**
- *  @file       test_auxilliary_rle.c
+ *  @file       test_auxiliary_rle.c
  *  @copyright  2021 Sierra Wireless Inc.
  *
  *  @remark
@@ -7,7 +7,7 @@
  *
  *  @brief      Unit test cases for run length encoding implementation.
  */
-#include "auxilliary/rle.c"
+#include "auxiliary/rle.c"
 
 /*********************************** Begin Test Implementation ************************************/
 #include "tap.h"
