@@ -52,9 +52,9 @@ void gdbs_close_comms(void);
 /**
  * Send one character to the open communication port.
  *
- * @retval  0 Character was sent successfully.
- * @retval <0 An error occurred.  The exact value will be a negative enum gdbs_error entry
- *            indicating what went wrong.
+ * @retval  0   Character was sent successfully.
+ * @retval <0   Sending failed.  The exact value will be a negative enum gdbs_error entry indicating
+ *              what went wrong.
  */
 int gdbs_send
 (

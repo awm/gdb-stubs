@@ -13,9 +13,8 @@ set(SRCS
     auxiliary/binary.c
     auxiliary/checksum.c
     auxiliary/hex.c
+    auxiliary/packet.c
     auxiliary/rle.c
-
-    main.c
 )
 
 include_directories(

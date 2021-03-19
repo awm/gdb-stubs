@@ -321,7 +321,7 @@ static void test_binary_decode(void)
 Python commands to help simplify generation:
 
 for i in range(0, 256):
-    print("    TBE(0x{:02X}, 1);".format(i))
+    print("    TBD(0x{:02X}, 1);".format(i))
 */
 
     TBD(0x00);
