@@ -44,3 +44,6 @@ source
 
 tests/unit
     Unit testing infrastructure and test source files.
+
+tools
+    Miscellaneous tools and scripts developed to help with testing and development.

@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+#
+# @file      mkpacket
+# @copyright 2021 Sierra Wireless Inc.
+#
+# @remark
+#     SPDX-License-Identifier: MPL-2.0
+#
+# @brief    Tool to generate packets formatted according to the GDB protocol.
+#           Given a raw payload, this tool produces a complete packet based to the selected options.
+#
+import argparse
+import sys
+
+def calculate_checksum(data):
+    """
+    Calculate the modulo-256 checksum of a data buffer.
+
+    :param data: Buffer to calculate the checksum over.
+    :type data: str
+    """
+    checksum = 0
+    for b in data:
+        checksum += ord(b)
+    checksum &= 0xFF
+    return checksum
+
+def needs_escaping(b, extra_escapes):
+    """
+    Determine if a byte needs to be converted to a binary escape sequence.
+
+    :param b: Byte to test.
+    :type b: int
+    :param extra_escapes: Extra characters to encode as binary.
+    :type extra_escapes: list
+    :return: True if escaping is required, False if it is not.
+    :rtype: bool
+    """
+    if b < ord(' ') or b > ord('~'):
+        return True
+    elif b in [ord(v) for v in ['$', '%', '#', '}']]:
+        return True
+    elif b in [ord(v) for v in extra_escapes]:
+        return True
+    else:
+        return False
+
+def binary_encode(data, extra_escapes):
+    """
+    Escape binary values in a data string.
+
+    :param data: Data string.
+    :type data: bytes
+    :param extra_escapes: Extra characters to encode as binary.
+    :type extra_escapes: list
+    :return: Encoded data string.
+    :rtype: str
+    """
+    encoded = ""
+    for b in data:
+        if needs_escaping(b, extra_escapes):
+            encoded += "}" + chr(b ^ 0x20)
+        else:
+            encoded += chr(b)
+    return encoded
+
+def make_packet(payload, prefix='', checksum=False, binary=False, extra_escapes=[]):
+    """
+    Generate a formatted GDB packet with the supplied payload.
+
+    :param payload: Payload string.
+    :type payload: str
+    :param prefix: Packet prefix character, defaults to ''
+    :type prefix: str, optional
+    :param checksum: Generate and append checksum to packet, defaults to False
+    :type checksum: bool, optional
+    :param binary: Encode binary values using escape sequences, defaults to False
+    :type binary: bool, optional
+    :param extra_escapes: Extra characters to encode as binary, defaults to []
+    :type extra_escapes: list, optional
+    """
+
+    if binary:
+        body = binary_encode(bytes(payload, 'utf-8'), extra_escapes)
+    else:
+        body = payload
+
+    suffix = ''
+    if checksum:
+        suffix = "#{0:02X}".format(calculate_checksum(body))
+
+    packet = prefix + body + suffix
+    return packet
+
+def main():
+    """Script entry point."""
+
+    parser = argparse.ArgumentParser(description="Format GDB protocol packets")
+    parser.add_argument(
+        "-a", "--ack",
+        action="store_true",
+        help="generate an ack packet"
+    )
+    parser.add_argument(
+        "-n", "--nack",
+        action="store_true",
+        help="generate a nack packet"
+    )
+    parser.add_argument(
+        "-c", "--command",
+        action="store",
+        help="generate a command packet (gdb -> stub) with the supplied payload"
+    )
+    parser.add_argument(
+        "-r", "--response",
+        action="store",
+        help="generate a response packet (stub -> gdb) with the supplied payload"
+    )
+    parser.add_argument(
+        "-o", "--notification",
+        action="store",
+        help="generate a notification packet with the supplied payload"
+    )
+    parser.add_argument(
+        "-b", "--binary",
+        action="store_true",
+        help="encode binary values"
+    )
+
+    args = parser.parse_args()
+
+    packet = None
+    if args.ack:
+        packet = make_packet('+')
+    elif args.nack:
+        packet = make_packet('-')
+    elif args.command is not None:
+        packet = make_packet(args.command, prefix='$', checksum=True, binary=args.binary)
+    elif args.response is not None:
+        packet = make_packet(args.response,
+                             prefix='$',
+                             checksum=True,
+                             binary=args.binary,
+                             extra_escapes=['*'])
+    elif args.notification is not None:
+        packet = make_packet(args.notification, prefix='%', checksum=True, binary=args.binary)
+
+    if packet is not None:
+        print(repr(packet).strip("'"))
+
+    sys.exit(0)
+
+main()

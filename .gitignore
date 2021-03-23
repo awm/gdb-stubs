@@ -14,7 +14,8 @@ _build/
 build/
 
 # Editor files
-/.vscode
+.vscode
+*.code-workspace
 
 # Debugger files
 .gdb_history
