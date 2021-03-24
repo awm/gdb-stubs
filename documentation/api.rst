@@ -26,5 +26,5 @@ Hooks
 
 *What you provide to the stub.*
 
-.. doxygenfile:: gdbdevice.h
+.. doxygenfile:: gdbsdevice.h
     :sections: briefdescription define enum typedef var func

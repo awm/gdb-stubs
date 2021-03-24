@@ -1,5 +1,5 @@
 /**
- *  @file       gdbdevice.h
+ *  @file       gdbsdevice.h
  *  @copyright  2021 Sierra Wireless Inc.
  *
  *  @remark
@@ -8,8 +8,8 @@
  *  @brief      Internal interface for the application code to provide I/O and debug hooks to the
  *              GDB stub.
  */
-#ifndef GDBDEVICE_H_
-#define GDBDEVICE_H_
+#ifndef GDBSDEVICE_H_
+#define GDBSDEVICE_H_
 
 /**
  * Flush the device's instruction cache.  If the platform has no instruction cache then this
@@ -70,4 +70,4 @@ int gdbs_send
  */
 int gdbs_receive(void);
 
-#endif /* end GDBDEVICE_H_ */
+#endif /* end GDBSDEVICE_H_ */
