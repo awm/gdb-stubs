@@ -16,6 +16,11 @@ Functions
 
 *What the stub provides to you.*
 
+.. _api-gdbstub-h:
+
+gdbstub.h
+^^^^^^^^^
+
 .. doxygenfile:: gdbstub.h
     :sections: briefdescription define enum typedef var func
 
@@ -25,6 +30,19 @@ Hooks
 -----
 
 *What you provide to the stub.*
+
+.. _api-gdbsconfig-h:
+
+gdbsconfig.h
+^^^^^^^^^^^^
+
+.. doxygenfile:: gdbsconfig.h
+    :sections: briefdescription define enum typedef var func
+
+.. _api-gdbsdevice-h:
+
+gdbsdevice.h
+^^^^^^^^^^^^
 
 .. doxygenfile:: gdbsdevice.h
     :sections: briefdescription define enum typedef var func
