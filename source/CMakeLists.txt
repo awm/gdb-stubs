@@ -39,5 +39,13 @@ if(NOT HAVE_STRNCMP)
     list(APPEND SRCS stdc/strncmp.c)
 endif()
 
+# Set defines for detected features.
+if(HAVE_NULL)
+    add_compile_definitions(HAVE_NULL)
+endif()
+if(HAVE_ASSERT)
+    add_compile_definitions(HAVE_ASSERT)
+endif()
+
 # Generate library of GDB stub code.
 add_library(gdbstub STATIC ${SRCS})

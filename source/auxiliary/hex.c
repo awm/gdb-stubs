@@ -11,7 +11,8 @@
 
 #include "gdbstub.h"
 
-#include "debug/debug.h"
+#include "stdc/assert.h"
+#include "stdc/null.h"
 
 /**
  * Convert a single hexadecimal digit to an integer value.

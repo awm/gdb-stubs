@@ -9,7 +9,8 @@
  */
 #include "checksum.h"
 
-#include "debug/debug.h"
+#include "stdc/assert.h"
+#include "stdc/null.h"
 
 /**
  * Calculate a simple modulo-256 checksum of a data buffer.

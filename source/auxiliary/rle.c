@@ -12,7 +12,8 @@
 #include "gdbstub.h"
 
 #include "auxiliary/packet.h"
-#include "debug/debug.h"
+#include "stdc/assert.h"
+#include "stdc/null.h"
 
 #define ENCODING_MIN_THRESHOLD 3    ///< No encoding is done for runs of this size or smaller.
 #define ENCODING_MAX_THRESHOLD 98   ///< Runs of longer than this size are split up.

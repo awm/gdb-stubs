@@ -14,7 +14,8 @@
 
 #include "auxiliary/packet.h"
 #include "auxiliary/rle.h"
-#include "debug/debug.h"
+#include "stdc/assert.h"
+#include "stdc/null.h"
 
 /**
  * Encode a byte as an escaped binary value (if applicable).

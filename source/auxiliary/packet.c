@@ -14,7 +14,8 @@
 #include "auxiliary/binary.h"
 #include "auxiliary/checksum.h"
 #include "auxiliary/hex.h"
-#include "debug/debug.h"
+#include "stdc/assert.h"
+#include "stdc/null.h"
 
 /// Value indicating no prefix character on a pushed packet.
 #define NO_PREFIX '\0'

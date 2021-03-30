@@ -19,6 +19,8 @@ include(CTest)
 include(CheckSymbolExists)
 
 # Test for platform features.
+check_symbol_exists(NULL    "stdlib.h" HAVE_NULL)
+check_symbol_exists(assert  "assert.h" HAVE_ASSERT)
 check_symbol_exists(memcmp  "string.h" HAVE_MEMCMP)
 check_symbol_exists(memcpy  "string.h" HAVE_MEMCPY)
 check_symbol_exists(memset  "string.h" HAVE_MEMSET)

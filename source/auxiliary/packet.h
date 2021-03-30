@@ -83,7 +83,7 @@ struct packet_writer
  */
 typedef int (*packet_source_function)
 (
-    void *param ///< User parameter associated provided to the packet_receive call.
+    void *param ///< User parameter provided to the packet_receive call.
 );
 
 /**
