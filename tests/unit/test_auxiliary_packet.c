@@ -424,16 +424,16 @@ struct testbuf
 };
 #define TB_INIT(p) ((struct testbuf) { 0, sizeof(p), (unsigned char *) (p) })
 
-static int test_sink_function
+int gdbs_send
 (
-    unsigned char    byte,
-    void            *param
+    void *comm,
+    int   c
 )
 {
-    struct testbuf *buf = param;
+    struct testbuf *buf = comm;
 
     assert(buf->i < buf->length - 1);
-    buf->data[buf->i]   = (char) byte;
+    buf->data[buf->i]   = (unsigned char) c;
     buf->data[++buf->i] = '\0';
 
     return GDBS_ERROR_OK;
@@ -447,13 +447,13 @@ static void test_packet_writer_push_ack(void)
 
     TAP_DIAG("In %s", __func__);
 
-    packet_writer_init(&writer, PT_ACK, &test_sink_function, &buf);
+    packet_writer_init(&writer, PT_ACK, &buf);
     TAP_OK(packet_writer_push_ack(&writer) == 0,        "Push ack");
     TAP_OK(packet_writer_finish(&writer) == 0,          "Complete ack");
     TAP_OK(strncmp(packet, "+", sizeof(packet)) == 0,   "Composed packet: '%s'", packet);
 
     buf = TB_INIT(packet);
-    packet_writer_init(&writer, PT_ACK, &test_sink_function, &buf);
+    packet_writer_init(&writer, PT_ACK, &buf);
     TAP_OK(packet_writer_push_nack(&writer) == 0,       "Push nack");
     TAP_OK(packet_writer_finish(&writer) == 0,          "Complete nack");
     TAP_OK(strncmp(packet, "-", sizeof(packet)) == 0,   "Composed packet: '%s'", packet);
@@ -467,13 +467,13 @@ static void test_packet_writer_push(void)
 
     TAP_DIAG("In %s", __func__);
 
-    packet_writer_init(&writer, PT_MESSAGE, &test_sink_function, &buf);
+    packet_writer_init(&writer, PT_MESSAGE, &buf);
     TAP_OK(packet_writer_push(&writer, '?') == 0,           "Push byte");
     TAP_OK(packet_writer_finish(&writer) == 0,              "Complete packet");
     TAP_OK(strncmp(packet, "$?#3F", sizeof(packet)) == 0,   "Composed packet: '%s'", packet);
 
     buf = TB_INIT(packet);
-    packet_writer_init(&writer, PT_MESSAGE, &test_sink_function, &buf);
+    packet_writer_init(&writer, PT_MESSAGE, &buf);
     TAP_OK(packet_writer_push(&writer, 'v') == 0,   "Push byte");
     TAP_OK(packet_writer_push(&writer, 'C') == 0,   "Push byte");
     TAP_OK(packet_writer_push(&writer, 'o') == 0,   "Push byte");
@@ -490,7 +490,7 @@ static void test_packet_writer_push(void)
                                                                     packet);
 
     buf = TB_INIT(packet);
-    packet_writer_init(&writer, PT_NOTIFICATION, &test_sink_function, &buf);
+    packet_writer_init(&writer, PT_NOTIFICATION, &buf);
     TAP_OK(packet_writer_push(&writer, 'S') == 0,   "Push byte");
     TAP_OK(packet_writer_push(&writer, 't') == 0,   "Push byte");
     TAP_OK(packet_writer_push(&writer, 'o') == 0,   "Push byte");
@@ -569,12 +569,12 @@ static void test_packet_writer_push(void)
         packet);
 }
 
-static int test_source_function
+int gdbs_receive
 (
-    void *param
+    void *comm
 )
 {
-    struct testbuf *buf = param;
+    struct testbuf *buf = comm;
 
     if (buf->i >= buf->length)
     {
@@ -582,7 +582,7 @@ static int test_source_function
     }
     else
     {
-        return (unsigned char) buf->data[buf->i++];
+        return buf->data[buf->i++];
     }
 }
 
@@ -596,7 +596,7 @@ static void test_packet_receive(void)
         struct testbuf  buf = TB_INIT(buffer);                                      \
         unsigned char   packet[64];                                                 \
         unsigned long   length = sizeof(packet);                                    \
-        result = packet_receive(packet, &length, (t), &test_source_function, &buf); \
+        result = packet_receive(packet, &length, (t), &buf);                        \
         TAP_OK(result == (r), "Receive result: %d", result);                        \
         TAP_OK(result < 0 || length == strlen(p), "Packet length: %lu", length);    \
         TAP_OK(result < 0 || memcmp(buffer, packet, length) == 0, "Packet match");  \

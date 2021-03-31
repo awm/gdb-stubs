@@ -34,20 +34,24 @@ int gdbs_register_exceptions(void);
 void gdbs_deregister_exceptions(void);
 
 /**
- * Initialize communications using a serial port.  Perform any setup that is required to initialize
- * the selected port.
+ * Initialize a communications port.
+ *
+ * @retval  0 Port setup was successful.
+ * @retval <0 An error occurred.  The exact value will be a negative enum gdbs_error entry
+ *            indicating what went wrong.
  */
-int gdbs_open_comms_serial
+int gdbs_open_comm
 (
-    const char       *port,  ///< Identifier indicating the serial port to use.
-    unsigned int      baud,  ///< Selected baud rate.
-    enum gdbs_parity  parity ///< Selected parity mode.
+    void *comm ///< Communication parameter that was passed to gdbs_initialize().
 );
 
 /**
  * Close the active communications port and return control of it to the application.
  */
-void gdbs_close_comms(void);
+void gdbs_close_comm
+(
+    void *comm ///< Communication parameter that was passed to gdbs_initialize().
+);
 
 /**
  * Send one character to the open communication port.
@@ -58,7 +62,8 @@ void gdbs_close_comms(void);
  */
 int gdbs_send
 (
-    int c ///< The character to send.
+    void *comm, ///< Communication parameter that was passed to gdbs_initialize().
+    int   c     ///< The character to send.
 );
 
 /**
@@ -68,6 +73,9 @@ int gdbs_send
  * @retval  <0 An error occurred.  The exact value will be a negative enum gdbs_error entry
  *             indicating what went wrong.
  */
-int gdbs_receive(void);
+int gdbs_receive
+(
+    void *comm ///< Communication parameter that was passed to gdbs_initialize().
+);
 
 #endif /* end GDBSDEVICE_H_ */

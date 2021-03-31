@@ -48,43 +48,17 @@ struct packet_tokenizer
                                         ///< previous delimiter.
 };
 
-/**
- * Callback type for writing packet data out.
- *
- * @retval 0                    Byte successfully written.
- * @retval <0                   Sending failed.  The exact value will be a negative enum gdbs_error
- *                              entry indicating what went wrong.
- */
-typedef int (*packet_sink_function)
-(
-    unsigned char    byte, ///< Byte to write out.
-    void            *param ///< User parameter associated with the packet writer.
-);
-
 /// State container for packet assembly.
 struct packet_writer
 {
-    enum packet_type         type;      ///< Packet type.
-    unsigned char            buffer[4]; ///< Scratch buffer for packet data.
-    unsigned long            buffered;  ///< Number of buffered bytes.
-    unsigned char            checksum;  ///< Running checksum of packet payload.
-    int                      finished;  ///< Boolean flag indicating remaining bytes are buffered.
+    enum packet_type     type;      ///< Packet type.
+    unsigned char        buffer[4]; ///< Scratch buffer for packet data.
+    unsigned long        buffered;  ///< Number of buffered bytes.
+    unsigned char        checksum;  ///< Running checksum of packet payload.
+    int                  finished;  ///< Boolean flag indicating remaining bytes are buffered.
 
-    packet_sink_function     sink;      ///< Function to call to output packet bytes.
-    void                    *param;     ///< Arbitrary parameter for sink function.
+    void                *comm;      ///< Communication parameter.
 };
-
-/**
- * Callback type for reading in packet data.  This function will block until a byte is received.
- *
- * @retval >=0  Received data byte.
- * @retval <0   Receive failed.  The exact value will be a negative enum gdbs_error entry indicating
- *              what went wrong.
- */
-typedef int (*packet_source_function)
-(
-    void *param ///< User parameter provided to the packet_receive call.
-);
 
 /**
  * Receive a complete packet from a data source.  This function will block until a verified packet
@@ -96,14 +70,11 @@ typedef int (*packet_source_function)
  */
 int packet_receive
 (
-    unsigned char           *buffer,        ///< [out]    Buffer into which to receive packet data.
-    unsigned long           *length,        ///< [in,out] Size of the buffer as input, length of the
-                                            ///<          packet as output.
-    enum packet_type         expected_type, ///< [in]     Type of packet expected.
-    packet_source_function   source,        ///< [in]     Callback to invoke to read in a byte of
-                                            ///<          data.
-    void                    *param          ///< [in]     Arbitrary data to pass to the source
-                                            ///<          callback.
+    unsigned char       *buffer,        ///< [out]    Buffer into which to receive packet data.
+    unsigned long       *length,        ///< [in,out] Size of the buffer as input, length of the
+                                        ///<          packet as output.
+    enum packet_type     expected_type, ///< [in]     Type of packet expected.
+    void                *comm           ///< [in]     Communication parameter.
 );
 
 /**
@@ -153,8 +124,7 @@ void packet_writer_init
 (
     struct packet_writer    *packet, ///< [out] Packet writer instance to initialize.
     enum packet_type         type,   ///< [in]  Packet type to be sent.
-    packet_sink_function     sink,   ///< [in]  Callback to invoke to send packet data.
-    void                    *param   ///< [in]  Optional parameter to pass to the sink function.
+    void                    *comm    ///< [in]  Communication parameter.
 );
 
 /**

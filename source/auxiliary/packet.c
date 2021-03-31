@@ -9,6 +9,7 @@
  */
 #include "packet.h"
 
+#include "gdbsdevice.h"
 #include "gdbstub.h"
 
 #include "auxiliary/binary.h"
@@ -129,14 +130,11 @@ end:
  */
 int packet_receive
 (
-    unsigned char           *buffer,        ///< [out]    Buffer into which to receive packet data.
-    unsigned long           *length,        ///< [in,out] Size of the buffer as input, length of the
-                                            ///<          packet as output.
-    enum packet_type         expected_type, ///< [in]     Type of packet expected.
-    packet_source_function   source,        ///< [in]     Callback to invoke to read in a byte of
-                                            ///<          data.
-    void                    *param          ///< [in]     Arbitrary data to pass to the source
-                                            ///<          callback.
+    unsigned char       *buffer,        ///< [out]    Buffer into which to receive packet data.
+    unsigned long       *length,        ///< [in,out] Size of the buffer as input, length of the
+                                        ///<          packet as output.
+    enum packet_type     expected_type, ///< [in]     Type of packet expected.
+    void                *comm           ///< [in]     Communications parameter.
 )
 {
     enum packet_state
@@ -154,7 +152,7 @@ int packet_receive
 
     for (i = 0; i < *length; ++i)
     {
-        received = source(param);
+        received = gdbs_receive(comm);
         if (received < 0)
         {
             return received;
@@ -360,16 +358,13 @@ void packet_writer_init
 (
     struct packet_writer    *packet, ///< [out] Packet writer instance to initialize.
     enum packet_type         type,   ///< [in]  Packet type to be sent.
-    packet_sink_function     sink,   ///< [in]  Callback to invoke to send packet data.
-    void                    *param   ///< [in]  Optional parameter to pass to the sink function.
+    void                    *comm    ///< [in]  Communication parameter.
 )
 {
     assert(packet != NULL);
-    assert(sink != NULL);
 
     packet->type = type;
-    packet->sink = sink;
-    packet->param = param;
+    packet->comm = comm;
     packet->checksum = 0;
     packet->finished = 0;
 
@@ -406,10 +401,9 @@ int packet_writer_push_ack
 
     assert(packet != NULL);
     assert(packet->type == PT_ACK);
-    assert(packet->sink != NULL);
     assert(!packet->finished);
 
-    result = packet->sink(ACK_CHAR, packet->param);
+    result = gdbs_send(packet->comm, ACK_CHAR);
     if (result == GDBS_ERROR_OK)
     {
         packet->finished = 1;
@@ -434,10 +428,9 @@ int packet_writer_push_nack
 
     assert(packet != NULL);
     assert(packet->type == PT_ACK);
-    assert(packet->sink != NULL);
     assert(!packet->finished);
 
-    result = packet->sink(NACK_CHAR, packet->param);
+    result = gdbs_send(packet->comm, NACK_CHAR);
     if (result == GDBS_ERROR_OK)
     {
         packet->finished = 1;
@@ -461,7 +454,7 @@ static int sink_buffered_data
 
     while (packet->buffered > 0)
     {
-        result = packet->sink(packet->buffer[0], packet->param);
+        result = gdbs_send(packet->comm, packet->buffer[0]);
         if (result != GDBS_ERROR_OK)
         {
             break;
@@ -495,13 +488,12 @@ int packet_writer_push
 
     assert(packet != NULL);
     assert(packet->type != PT_ACK);
-    assert(packet->sink != NULL);
     assert(!packet->finished);
 
     result = sink_buffered_data(packet);
     if (result == GDBS_ERROR_OK)
     {
-        result = packet->sink(byte, packet->param);
+        result = gdbs_send(packet->comm, byte);
         if (result == GDBS_ERROR_OK)
         {
             accumulate_checksum(&packet->checksum, byte);
@@ -526,7 +518,6 @@ int packet_writer_finish
     int result;
 
     assert(packet != NULL);
-    assert(packet->sink != NULL);
 
     if (packet->type == PT_ACK)
     {
