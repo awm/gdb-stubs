@@ -13,6 +13,7 @@
 #if HAVE_NULL
 #   include <stdlib.h>
 #else
+/// NULL pointer value definition.
 #   define NULL ((void *) 0x0)
 #endif
 

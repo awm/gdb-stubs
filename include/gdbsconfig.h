@@ -24,4 +24,15 @@
 #   define GDBS_PACKET_BUFFER_DECL
 #endif
 
+/// If the log implementation requires an include file, define GDBS_LOG_INCLUDE to the necessary
+/// include pattern.
+#ifdef GDBS_LOG_INCLUDE
+#   include GDBS_LOG_INCLUDE
+#endif
+
+/// Disable logging by default.  To enable logging, define GDBS_LOG to a printf-like function.
+#ifndef GDBS_LOG
+#   define GDBS_LOG(...)
+#endif
+
 #endif /* end GDBSCONFIG_H_ */

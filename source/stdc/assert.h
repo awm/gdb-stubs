@@ -13,6 +13,7 @@
 #if HAVE_ASSERT
 #   include <assert.h>
 #else
+/// Empty assert implementation if none is provided.
 #   define assert(cond)
 #endif
 
