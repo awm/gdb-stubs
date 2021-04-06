@@ -448,13 +448,13 @@ static void test_packet_writer_push_ack(void)
     TAP_DIAG("In %s", __func__);
 
     packet_writer_init(&writer, PT_ACK, &buf);
-    TAP_OK(packet_writer_push_ack(&writer) == 0,        "Push ack");
+    TAP_OK(packet_writer_push_ack(&writer, 1) == 0,     "Push ack");
     TAP_OK(packet_writer_finish(&writer) == 0,          "Complete ack");
     TAP_OK(strncmp(packet, "+", sizeof(packet)) == 0,   "Composed packet: '%s'", packet);
 
     buf = TB_INIT(packet);
     packet_writer_init(&writer, PT_ACK, &buf);
-    TAP_OK(packet_writer_push_nack(&writer) == 0,       "Push nack");
+    TAP_OK(packet_writer_push_ack(&writer, 0) == 0,     "Push nack");
     TAP_OK(packet_writer_finish(&writer) == 0,          "Complete nack");
     TAP_OK(strncmp(packet, "-", sizeof(packet)) == 0,   "Composed packet: '%s'", packet);
 }

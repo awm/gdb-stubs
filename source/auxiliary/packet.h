@@ -128,29 +128,17 @@ void packet_writer_init
 );
 
 /**
- * Push an ack packet.  Only valid for ack type packets.  Once this function succeeds no further
- * data may be sent and packet_writer_finish should be called.
+ * Push an ack or nack packet.  Only valid for ack type packets.  Once this function succeeds no
+ * further data may be sent and packet_writer_finish should be called.
  *
- * @retval 0                    Ack successfully written.
- * @retval <0                   Sending failed.  The exact value will be a negative enum gdbs_error
- *                              entry indicating what went wrong.
+ * @retval 0    Ack successfully written.
+ * @retval <0   Sending failed.  The exact value will be a negative enum gdbs_error entry indicating
+ *              what went wrong.
  */
 int packet_writer_push_ack
 (
-    struct packet_writer *packet ///< Packet writer instance.
-);
-
-/**
- * Push a negative ack packet.  Only valid for ack type packets.  Once this function succeeds no
- * further data may be sent and packet_writer_finish should be called.
- *
- * @retval 0                    Nack successfully written.
- * @retval <0                   Sending failed.  The exact value will be a negative enum gdbs_error
- *                              entry indicating what went wrong.
- */
-int packet_writer_push_nack
-(
-    struct packet_writer *packet ///< Packet writer instance.
+    struct packet_writer *packet,   ///< Packet writer instance.
+    int                   ack       ///< Push an ack or a nack.
 );
 
 /**
