@@ -29,12 +29,6 @@ source
         Buffer manipulation and checksum routines.  Contains algorithms used for packet data
         processing.
 
-    debug
-        Bare-bones debugging features for the stub code itself.
-
-    io/serial
-        Platform-agnostic portions of the I/O interface for serial connections.
-
     protocol
         Implementation of the GDB protocol itself.
 
@@ -42,8 +36,11 @@ source
         Minimal implementations of the required standard C functions for platforms which do not
         provide them.
 
-tests/unit
-    Unit testing infrastructure and test source files.
+tests
+    Test scripts and test case implementations.
+
+    unit
+        Unit testing infrastructure and test source files.
 
 tools
     Miscellaneous tools and scripts developed to help with testing and development.

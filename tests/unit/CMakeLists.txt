@@ -37,3 +37,7 @@ add_executable(
     ${CMAKE_SOURCE_DIR}/source/auxiliary/hex.c
 )
 add_test(test_auxiliary_packet test_auxiliary_packet)
+
+# Test the library core.
+add_executable(test_core test_core.c)
+add_test(test_core test_core)

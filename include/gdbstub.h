@@ -47,9 +47,22 @@ int gdbs_initialize
 );
 
 /**
+ * Clean up the debugger hooks.  This will return the system exception handling state to what it was
+ * before the stub was initialized.  Another call to gdbs_initialize() will be required to use the
+ * stub again.
+ */
+void gdbs_cleanup(void);
+
+/**
  * Insert a software breakpoint.  This may be used anywhere in the code after gdbs_initialize() has
  * been called to force execution into the debugger.
  */
 void gdbs_breakpoint(void);
+
+/**
+ * Entry point for the stub event handler.  In most cases this will be called from specific
+ * interrupt or exception handlers in response to system aborts or breakpoints.
+ */
+void gdbs_enter(void);
 
 #endif /* end GDBSTUB_H_ */

@@ -25,13 +25,20 @@ void gdbs_flush_icache(void);
  * @retval <0 An error occurred.  The exact value will be a negative enum gdbs_error entry
  *            indicating what went wrong.
  */
-int gdbs_register_exceptions(void);
+int gdbs_register_exceptions
+(
+    void **state ///< [out] Arbitrary exception state to be retained and passed to
+                 ///<       gdbs_deregister_exceptions().
+);
 
 /**
  * Deregister the exception handlers that are necessary for triggering debugger events, and restore
  * the previous values.
  */
-void gdbs_deregister_exceptions(void);
+void gdbs_deregister_exceptions
+(
+    void *state ///< Exception state data from gdbs_register_exceptions().
+);
 
 /**
  * Initialize a communications port.

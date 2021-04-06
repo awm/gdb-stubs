@@ -15,6 +15,7 @@ set(SRCS
     auxiliary/hex.c
     auxiliary/packet.c
     auxiliary/rle.c
+    core.c
 )
 
 include_directories(
@@ -45,6 +46,9 @@ if(HAVE_NULL)
 endif()
 if(HAVE_ASSERT)
     add_compile_definitions(HAVE_ASSERT)
+endif()
+if(HAVE_MEMSET)
+    add_compile_definitions(HAVE_MEMSET)
 endif()
 
 # Generate library of GDB stub code.
