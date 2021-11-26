@@ -27,6 +27,7 @@ Distributed under the terms of the :doc:`license`.
 
    getting-started
    layout
+   requirements
    api
    license
 
