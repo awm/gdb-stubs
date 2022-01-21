@@ -1,5 +1,4 @@
 ..  Documentation of directory structure and source code organization.
-    Copyright: 2021 Sierra Wireless Inc.
     SPDX-License-Identifier: MPL-2.0
 
 Source Code Organization

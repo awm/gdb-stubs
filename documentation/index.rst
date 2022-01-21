@@ -1,5 +1,4 @@
 ..  GDB Stub Framework documentation entry point.
-    Copyright: 2021 Sierra Wireless Inc.
     SPDX-License-Identifier: MPL-2.0
 
 GDB Stub Framework
@@ -16,8 +15,6 @@ debug environment, and hooks for debugging actions and I/O operations.
 
 License
 -------
-
-**Copyright 2021 Sierra Wireless Inc.**
 
 Distributed under the terms of the :doc:`license`.
 

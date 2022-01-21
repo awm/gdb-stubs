@@ -1,6 +1,5 @@
 #
 # @file      CMakeLists.txt
-# @copyright 2021 Sierra Wireless Inc.
 #
 # @remark
 #     SPDX-License-Identifier: MPL-2.0

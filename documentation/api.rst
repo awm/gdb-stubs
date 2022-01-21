@@ -1,5 +1,4 @@
 ..  Generated API documentation anchor point.
-    Copyright: 2021 Sierra Wireless Inc.
     SPDX-License-Identifier: MPL-2.0
 
 Framework API

@@ -1,6 +1,5 @@
 #
 # @file         conf.py
-# @copyright    2021 Sierra Wireless Inc.
 #
 # @remark
 #     SPDX-License-Identifier: MPL-2.0
@@ -26,8 +25,8 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'GDB Stub Framework'
-copyright = '2021 Sierra Wireless Inc'
-author = 'Sierra Wireless Inc'
+copyright = ''
+author = ''
 
 # -- General configuration ---------------------------------------------------
 
