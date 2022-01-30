@@ -1,10 +1,11 @@
 #
-# @file         conf.py
+# @file      conf.py
+# @copyright 2022 Andrew MacIsaac
 #
 # @remark
 #     SPDX-License-Identifier: MPL-2.0
 #
-# @brief        Configuration file for the Sphinx documentation builder.
+# @brief     Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
 # list see the documentation:
@@ -25,8 +26,8 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'GDB Stub Framework'
-copyright = ''
-author = ''
+copyright = '2022 Andrew MacIsaac'
+author = 'Andrew MacIsaac'
 
 # -- General configuration ---------------------------------------------------
 

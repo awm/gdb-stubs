@@ -1,4 +1,5 @@
 ..  Generated API documentation anchor point.
+    Copyright: 2022 Andrew MacIsaac
     SPDX-License-Identifier: MPL-2.0
 
 Framework API

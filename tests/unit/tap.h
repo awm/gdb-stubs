@@ -1,9 +1,10 @@
 /**
  *  @file       tap.h
- * 
+ *  @copyright  2022 Andrew MacIsaac
+ *
  *  @remark
  *      SPDX-License-Identifier: MPL-2.0
- * 
+ *
  *  @brief      Test Anything Protocol output macros.
  */
 #ifndef TAP_H_

@@ -1,4 +1,5 @@
 ..  GDB Stub Framework documentation entry point.
+    Copyright: 2022 Andrew MacIsaac
     SPDX-License-Identifier: MPL-2.0
 
 GDB Stub Framework
@@ -15,6 +16,8 @@ debug environment, and hooks for debugging actions and I/O operations.
 
 License
 -------
+
+**Copyright 2022 Andrew MacIsaac.**
 
 Distributed under the terms of the :doc:`license`.
 

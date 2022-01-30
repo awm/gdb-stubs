@@ -1,5 +1,6 @@
 /**
  *  @file       test_tap_sanity.c
+ *  @copyright  2022 Andrew MacIsaac
  *
  *  @remark
  *      SPDX-License-Identifier: MPL-2.0

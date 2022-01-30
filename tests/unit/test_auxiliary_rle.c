@@ -1,5 +1,6 @@
 /**
  *  @file       test_auxiliary_rle.c
+ *  @copyright  2022 Andrew MacIsaac
  *
  *  @remark
  *      SPDX-License-Identifier: MPL-2.0

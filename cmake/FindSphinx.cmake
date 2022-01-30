@@ -1,10 +1,11 @@
 #
 # @file      FindSphinx.cmake
+# @copyright 2022 Andrew MacIsaac
 #
 # @remark
 #     SPDX-License-Identifier: MPL-2.0
 #
-# @brief      Sphinx documentation generator module for CMake.
+# @brief     Sphinx documentation generator module for CMake.
 #
 include(FindPackageHandleStandardArgs)
 

@@ -83,4 +83,6 @@ the instructions for building the unit tests.
 
 ## License
 
+**Copyright 2022 Andrew MacIsaac.**
+
 Distributed under the terms of the [MPL-2.0](./LICENSE.txt)

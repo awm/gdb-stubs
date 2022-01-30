@@ -1,4 +1,5 @@
 ..  Software requirements.
+    Copyright: 2022 Andrew MacIsaac
     SPDX-License-Identifier: MPL-2.0
 
 Requirements
@@ -28,7 +29,7 @@ used directly.  The GDB source code includes stubs for the i386, ia64, m32r, m68
 architectures, however because of the ubiquity of hardware debug solutions, newer platforms such as
 various ARM flavours are not included in the sample stubs.  Many of the existing stubs are decades
 old and do not follow the greatest coding practices.  Each existing stub typically combines all of
-the command processing and platform-specific code in a single C file of between 800 and 2500 lines. 
+the command processing and platform-specific code in a single C file of between 800 and 2500 lines.
 The general approach for implementing new stubs appears to have been to copy an existing one
 wholesale and then modify it until it works on the new platform, which results in lots of duplicated
 code as well and the repeated propagation of some arbitrary design decisions by the first stub
@@ -36,7 +37,7 @@ writer.
 
 Overall, an arbitrary stub is not particularly long, and the necessary components are well described
 in the GDB documentation.  The main complexity in writing a stub derives from the necessity of
-ensuring that it hooks correctly into the interrupt/exception handling architecture of the system. 
+ensuring that it hooks correctly into the interrupt/exception handling architecture of the system.
 It must correctly intercept various types of events, such as hardware breakpoints, bus errors, and
 serial interrupts without itself disrupting the flow of normal execution.
 

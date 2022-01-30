@@ -1,5 +1,6 @@
 /**
  *  @file       hex.h
+ *  @copyright  2022 Andrew MacIsaac
  *
  *  @remark
  *      SPDX-License-Identifier: MPL-2.0
