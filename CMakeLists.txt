@@ -37,7 +37,9 @@ endif()
 
 # Subdirectories
 add_subdirectory(source)
-add_subdirectory(documentation)
+if (BUILD_DOCUMENTATION)
+    add_subdirectory(documentation)
+endif()
 if (NOT CMAKE_CROSSCOMPILING)
     add_subdirectory(tests/unit)
 endif()
