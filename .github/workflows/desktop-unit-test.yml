@@ -8,10 +8,12 @@
 #
 name: Desktop Unit Tests
 
-# Trigger normal CMake test builds for all branches on push and PR
+# Trigger normal CMake test builds for all branches on push, PR, and manual
+# trigger.
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 env:
   # Set CMake build type.
