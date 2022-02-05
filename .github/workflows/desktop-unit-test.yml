@@ -1,0 +1,142 @@
+#
+# @file        desktop-unit-test.yml
+# @copyright   2022 Andrew MacIsaac
+# @remark
+#      SPDX-License-Identifier: MPL-2.0
+#
+# @brief       Build and run the unit tests on the three desktop platforms.
+#
+name: Desktop Unit Tests
+
+# Trigger normal CMake test builds for all branches on push and PR
+on:
+  push:
+  pull_request:
+
+env:
+  # Set CMake build type.
+  BUILD_TYPE: Debug
+
+# Run the unit test builds for each platform.
+jobs:
+  # Linux build.
+  linux:
+    name:     Unit Test (Linux)
+    runs-on:  ubuntu-latest
+    steps:
+      # Install dependencies.
+      - name: Install APT dependencies
+        run:  sudo apt-get install -y ninja-build
+
+      # Check out the code.
+      - name: Clone ${{ github.repository }}
+        uses: actions/checkout@v2
+        with:
+          path: repo
+
+      # Create build directory.
+      - name: Create build environment
+        run:  cmake -E make_directory '${{ github.workspace }}/repo/build'
+
+      # Run CMake configuration.
+      - name:               Configure CMake
+        working-directory:  ${{ github.workspace }}/repo/build
+        shell:              bash
+        run:                cmake .. -G Ninja -DCMAKE_BUILD_TYPE="${BUILD_TYPE}"
+
+      # Build the library.
+      - name:               Build library
+        working-directory:  ${{ github.workspace }}/repo/build
+        shell:              bash
+        run:                cmake --build . --config "${BUILD_TYPE}"
+
+      # Run the unit tests.
+      - name:               Run tests
+        working-directory:  ${{ github.workspace }}/repo/build
+        shell:              bash
+        run: |
+          ctest                             \
+            --build-config "${BUILD_TYPE}"  \
+            --test-action test              \
+            --output-on-failure             \
+            --parallel 4
+
+  # Windows build.
+  mswin:
+    name:     Unit Test (Windows)
+    runs-on:  windows-latest
+    steps:
+      # Check out the code.
+      - name: Clone ${{ github.repository }}
+        uses: actions/checkout@v2
+        with:
+          path: repo
+
+      # Create build directory.
+      - name: Create build environment
+        run:  cmake -E make_directory '${{ github.workspace }}/repo/build'
+
+      # Run CMake configuration.
+      - name:               Configure CMake
+        working-directory:  ${{ github.workspace }}/repo/build
+        shell:              bash
+        run:                cmake .. -G 'Visual Studio 16 2019' -A x64
+
+      # Build the library.
+      - name:               Build library
+        working-directory:  ${{ github.workspace }}/repo/build
+        shell:              bash
+        run:                cmake --build . --config "${BUILD_TYPE}"
+
+      # Run the unit tests.
+      - name:               Run tests
+        working-directory:  ${{ github.workspace }}/repo/build
+        shell:              bash
+        run: |
+          ctest                             \
+            --build-config "${BUILD_TYPE}"  \
+            --test-action test              \
+            --output-on-failure             \
+            --parallel 4
+
+  # MacOS build.
+  macos:
+    name:     Unit Test (MacOS)
+    runs-on:  macos-latest
+    steps:
+      # Install dependencies.
+      - name: Install Homebrew dependencies
+        run:  brew install ninja
+
+      # Check out the code.
+      - name: Clone ${{ github.repository }}
+        uses: actions/checkout@v2
+        with:
+          path: repo
+
+      # Create build directory.
+      - name: Create build environment
+        run:  cmake -E make_directory '${{ github.workspace }}/repo/build'
+
+      # Run CMake configuration.
+      - name:               Configure CMake
+        working-directory:  ${{ github.workspace }}/repo/build
+        shell:              bash
+        run:                cmake .. -G Ninja -DCMAKE_BUILD_TYPE="${BUILD_TYPE}"
+
+      # Build the library.
+      - name:               Build library
+        working-directory:  ${{ github.workspace }}/repo/build
+        shell:              bash
+        run:                cmake --build . --config "${BUILD_TYPE}"
+
+      # Run the unit tests.
+      - name:               Run tests
+        working-directory:  ${{ github.workspace }}/repo/build
+        shell:              bash
+        run: |
+          ctest                             \
+            --build-config "${BUILD_TYPE}"  \
+            --test-action test              \
+            --output-on-failure             \
+            --parallel 6
