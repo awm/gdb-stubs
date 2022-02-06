@@ -12,6 +12,10 @@
 /*********************************** Begin Test Implementation ************************************/
 #include "tap.h"
 
+#ifdef _MSC_VER
+#   pragma warning(disable : 4996)  // Turn off strcpy deprecation warning.
+#endif
+
 static const unsigned long TEST_COUNT = 93 + 216 + 8;
 
 static void test_format_rle(void)
@@ -359,22 +363,10 @@ static void test_encode(void)
     TE('.', 102, ".*~.* ", "Different character (run of 102)");
 }
 
-/*
-void run_length_encode
-(
-    char            *buffer, ///< [in,out] Buffer of data to be encoded.  This data is encoded
-                             ///<          in-place, as the result will always be the same length or
-                             ///<          shorter.
-    unsigned long   *size    ///< [in,out] As input, the length of the incoming data buffer.  As
-                             ///<          output, the length of the encoded data now occupying the
-                             ///<          buffer.
-)
-*/
-
 static void test_run_length_encode(void)
 {
-    char            buffer[512];
-    unsigned long   size;
+    char    buffer[512];
+    size_t  size;
 
 #define TRLE(i, o, d)                                                           \
     do                                                                          \
