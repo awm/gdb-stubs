@@ -13,6 +13,7 @@
 #if HAVE_MEMSET
 #   include <string.h>
 #else
+#   include "size.h"
 /**
  * Fill a memory region with a byte value.
  *
@@ -20,9 +21,9 @@
  */
 void *memset
 (
-    void            *s, ///< Memory region to fill.
-    int              c, ///< Value to fill with.  Only the low byte is relevant.
-    unsigned long    n  ///< Number of bytes of s to fill.
+    void    *s, ///< Memory region to fill.
+    int      c, ///< Value to fill with.  Only the low byte is relevant.
+    size_t   n  ///< Number of bytes of s to fill.
 );
 #endif
 

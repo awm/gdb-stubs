@@ -23,9 +23,9 @@
  */
 static void format_rle
 (
-    char            *destination,   ///< [out] Buffer into which to write RLE entry.
-    char             value,         ///< [in]  Character being encoded.
-    unsigned long    repeats        ///< [in]  Number of repeats of the character being encoded.
+    char    *destination,   ///< [out] Buffer into which to write RLE entry.
+    char     value,         ///< [in]  Character being encoded.
+    size_t   repeats        ///< [in]  Number of repeats of the character being encoded.
 )
 {
     assert(destination != NULL);
@@ -48,16 +48,16 @@ static void format_rle
  *
  * @return Number of characters written to the destination buffer.
  */
-static unsigned long encode
+static size_t encode
 (
-    char            *destination,   ///< [out] Buffer into which to write the encoded run.
-    const char      *source,        ///< [in]  Buffer to read unencoded data from.
-    unsigned long    run            ///< [in]  Number of characters in the run.
+    char        *destination,   ///< [out] Buffer into which to write the encoded run.
+    const char  *source,        ///< [in]  Buffer to read unencoded data from.
+    size_t       run            ///< [in]  Number of characters in the run.
 )
 {
-    char          character;
-    unsigned long count = 0;
-    unsigned long i;
+    char    character;
+    size_t  count = 0;
+    size_t  i;
 
     while (run > 0)
     {
@@ -142,18 +142,16 @@ static unsigned long encode
  */
 void run_length_encode
 (
-    char            *buffer, ///< [in,out] Buffer of data to be encoded.  This data is encoded
-                             ///<          in-place, as the result will always be the same length or
-                             ///<          shorter.
-    unsigned long   *size    ///< [in,out] As input, the length of the incoming data buffer.  As
-                             ///<          output, the length of the encoded data now occupying the
-                             ///<          buffer.
+    char    *buffer, ///< [in,out]  Buffer of data to be encoded.  This data is encoded in-place, as
+                     ///<           the result will always be the same length or shorter.
+    size_t  *size    ///< [in,out]  As input, the length of the incoming data buffer.  As output, the
+                     ///<           length of the encoded data now occupying the buffer.
 )
 {
-    unsigned long e = 0;
-    unsigned long run;
-    unsigned long s;
-    unsigned long w = 0;
+    size_t e = 0;
+    size_t run;
+    size_t s;
+    size_t w = 0;
 
     assert(buffer != NULL);
     assert(size != NULL);

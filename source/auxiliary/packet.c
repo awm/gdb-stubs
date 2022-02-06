@@ -56,7 +56,7 @@ static int to_type
 static int extract_packet_checksum
 (
     const unsigned char *packet,  ///< [in]  Packet data.
-    unsigned long        length,  ///< [in]  Packet length.
+    size_t               length,  ///< [in]  Packet length.
     unsigned char       *checksum ///< [out] Decoded checksum.
 )
 {
@@ -88,7 +88,7 @@ static int extract_packet_checksum
 static int verify
 (
     const unsigned char *packet, ///< Packet data.
-    unsigned long        length  ///< Length of packet data.
+    size_t               length  ///< Length of packet data.
 )
 {
     int             result;
@@ -131,7 +131,7 @@ end:
 int packet_receive
 (
     unsigned char       *buffer,        ///< [out]    Buffer into which to receive packet data.
-    unsigned long       *length,        ///< [in,out] Size of the buffer as input, length of the
+    size_t              *length,        ///< [in,out] Size of the buffer as input, length of the
                                         ///<          packet as output.
     enum packet_type     expected_type, ///< [in]     Type of packet expected.
     void                *comm           ///< [in]     Communications parameter.
@@ -147,8 +147,8 @@ int packet_receive
 
     enum packet_state   state = PREFIX;
     int                 received;
-    unsigned long       i;
-    unsigned long       remaining = *length;
+    size_t              i;
+    size_t              remaining = *length;
 
     for (i = 0; i < *length; ++i)
     {
@@ -206,7 +206,7 @@ void packet_tokenizer_init
 (
     struct packet_tokenizer *tokenizer, ///< [out] Tokenizer instance to initialize.
     const unsigned char     *packet,    ///< [in]  Packet data.
-    unsigned long            length     ///< [in]  Length of packet data.
+    size_t                   length     ///< [in]  Length of packet data.
 )
 {
     assert(length > 0);
@@ -260,10 +260,10 @@ int packet_tokenizer_advance
                                         ///<       TOKEN_EOB to indicate that the end of the buffer
                                         ///<       should be considered the next delimiter.
     const unsigned char     **token,    ///< [out] Pointer to start of token in the packet buffer.
-    unsigned long            *length    ///< [out] Length of the token.
+    size_t                   *length    ///< [out] Length of the token.
 )
 {
-    int escaped;
+    int escaped = 0;
 
     assert(tokenizer != NULL);
     assert(token != NULL);

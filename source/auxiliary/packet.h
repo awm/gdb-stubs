@@ -10,6 +10,8 @@
 #ifndef PACKET_H_
 #define PACKET_H_
 
+#include "stdc/size.h"
+
 #define DATA_PACKET_START_CHAR          '$' ///< Character indicating start of a data packet.
 #define NOTIFICATION_PACKET_START_CHAR  '%' ///< Character indicating start of a notification.
 #define PAYLOAD_END_CHAR                '#' ///< Character indicating end of packet payload and
@@ -35,16 +37,16 @@ enum packet_type
 struct packet_tokenizer
 {
     const unsigned char *packet;        ///< Packet data.
-    unsigned long        length;        ///< Length of packet data.
+    size_t               length;        ///< Length of packet data.
 
     const unsigned char *start;         ///< Start of current token.
     const unsigned char *end;           ///< Character after the end of the current token.
-    unsigned long        skip;          ///< Number of characters to skip before searching for the
+    size_t               skip;          ///< Number of characters to skip before searching for the
                                         ///< next delimiter.
 
     const unsigned char *prev_start;    ///< Start of previous token.
     const unsigned char *prev_end;      ///< Character after the end of the previous token.
-    unsigned long        prev_skip;     ///< Number of characters to skip before searching for the
+    size_t               prev_skip;     ///< Number of characters to skip before searching for the
                                         ///< previous delimiter.
 };
 
@@ -53,7 +55,7 @@ struct packet_writer
 {
     enum packet_type     type;      ///< Packet type.
     unsigned char        buffer[4]; ///< Scratch buffer for packet data.
-    unsigned long        buffered;  ///< Number of buffered bytes.
+    size_t               buffered;  ///< Number of buffered bytes.
     unsigned char        checksum;  ///< Running checksum of packet payload.
     int                  finished;  ///< Boolean flag indicating remaining bytes are buffered.
 
@@ -71,7 +73,7 @@ struct packet_writer
 int packet_receive
 (
     unsigned char       *buffer,        ///< [out]    Buffer into which to receive packet data.
-    unsigned long       *length,        ///< [in,out] Size of the buffer as input, length of the
+    size_t              *length,        ///< [in,out] Size of the buffer as input, length of the
                                         ///<          packet as output.
     enum packet_type     expected_type, ///< [in]     Type of packet expected.
     void                *comm           ///< [in]     Communication parameter.
@@ -84,7 +86,7 @@ void packet_tokenizer_init
 (
     struct packet_tokenizer *tokenizer, ///< [out] Tokenizer instance to initialize.
     const unsigned char     *packet,    ///< [in]  Packet data.
-    unsigned long            length     ///< [in]  Length of packet data.
+    size_t                   length     ///< [in]  Length of packet data.
 );
 
 /**
@@ -105,7 +107,7 @@ int packet_tokenizer_advance
                                         ///<       TOKEN_EOB to indicate that the end of the buffer
                                         ///<       should be considered the next delimiter.
     const unsigned char     **token,    ///< [out] Pointer to start of token in the packet buffer.
-    unsigned long            *length    ///< [out] Length of the token.
+    size_t                   *length    ///< [out] Length of the token.
 );
 
 /**

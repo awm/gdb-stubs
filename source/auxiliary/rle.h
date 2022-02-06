@@ -10,6 +10,8 @@
 #ifndef RLE_H_
 #define RLE_H_
 
+#include "stdc/size.h"
+
 #define RLE_CHAR '*' ///< Character used to denote an RLE value.
 
 /**
@@ -17,12 +19,10 @@
  */
 void run_length_encode
 (
-    char            *buffer, ///< [in,out] Buffer of data to be encoded.  This data is encoded
-                             ///<          in-place, as the result will always be the same length or
-                             ///<          shorter.
-    unsigned long   *size    ///< [in,out] As input, the length of the incoming data buffer.  As
-                             ///<          output, the length of the encoded data now occupying the
-                             ///<          buffer.
+    char    *buffer, ///< [in,out] Buffer of data to be encoded.  This data is encoded in-place, as
+                     ///<          the result will always be the same length or shorter.
+    size_t  *size    ///< [in,out] As input, the length of the incoming data buffer.  As output, the
+                     ///<           length of the encoded data now occupying the buffer.
 );
 
 #endif /* end RLE_H_ */

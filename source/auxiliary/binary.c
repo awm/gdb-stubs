@@ -22,7 +22,7 @@
  *
  * @return Number of characters written to the output buffer (1 or 2).
  */
-unsigned long binary_encode
+size_t binary_encode
 (
     char            *buffer, ///< Buffer to write encoded value to.  Must have space for at least
                              ///< two characters.

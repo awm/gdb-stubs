@@ -357,7 +357,7 @@ void test_packet_tokenizer(void)
         char                 buffer[128];                               \
         const unsigned char *token = NULL;                              \
         int                  result;                                    \
-        unsigned long        length = 0;                                \
+        size_t               length = 0;                                \
         memset(buffer, 0, sizeof(buffer));                              \
         result = packet_tokenizer_advance((z), (d), &token, &length);   \
         if (length > 0 && token != NULL)                                \
@@ -366,7 +366,7 @@ void test_packet_tokenizer(void)
             memcpy(buffer, token, length);                              \
         }                                                               \
         TAP_OK(result == (r), "Advance result: %d", result);            \
-        TAP_OK(length == strlen(t), "Token length: %lu", length);       \
+        TAP_OK(length == strlen(t), "Token length: %zu", length);       \
         TAP_OK(strcmp(buffer, (t)) == 0, "Token: '%s'", buffer);        \
     } while (0)
 
@@ -595,10 +595,10 @@ static void test_packet_receive(void)
         int             result;                                                     \
         struct testbuf  buf = TB_INIT(buffer);                                      \
         unsigned char   packet[64];                                                 \
-        unsigned long   length = sizeof(packet);                                    \
+        size_t          length = sizeof(packet);                                    \
         result = packet_receive(packet, &length, (t), &buf);                        \
         TAP_OK(result == (r), "Receive result: %d", result);                        \
-        TAP_OK(result < 0 || length == strlen(p), "Packet length: %lu", length);    \
+        TAP_OK(result < 0 || length == strlen(p), "Packet length: %zu", length);    \
         TAP_OK(result < 0 || memcmp(buffer, packet, length) == 0, "Packet match");  \
     } while (0)
 

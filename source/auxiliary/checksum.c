@@ -19,13 +19,13 @@
  */
 unsigned char calculate_checksum
 (
-    const void      *buffer, ///< Buffer to calculate checksum over.
-    unsigned long    size    ///< Buffer size.
+    const void  *buffer, ///< Buffer to calculate checksum over.
+    size_t       size    ///< Buffer size.
 )
 {
     const unsigned char *bytes = (const unsigned char *) buffer;
+    size_t               i;
     unsigned char        result = 0;
-    unsigned long        i;
 
     assert(bytes != NULL);
 

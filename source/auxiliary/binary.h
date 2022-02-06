@@ -13,6 +13,8 @@
 #ifndef BINARY_H_
 #define BINARY_H_
 
+#include "stdc/size.h"
+
 /// Character used to begin a binary escape sequence.
 #define BINARY_ESCAPE_CHAR '}'
 
@@ -21,7 +23,7 @@
  *
  * @return Number of characters written to the output buffer (1 or 2).
  */
-unsigned long binary_encode
+size_t binary_encode
 (
     char            *buffer, ///< Buffer to write encoded value to.  Must have space for at least
                              ///< two characters.

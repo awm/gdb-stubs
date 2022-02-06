@@ -87,9 +87,9 @@ void proto_process
 )
 {
     int                      result;
+    size_t                   length;
     struct environment      *env = core_get_environment();
     struct packet_tokenizer  tokenizer;
-    unsigned long            length;
 
     if (send_stop_reply)
     {

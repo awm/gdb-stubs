@@ -10,6 +10,8 @@
 #ifndef CHECKSUM_H_
 #define CHECKSUM_H_
 
+#include "stdc/size.h"
+
 /**
  * Accumulate one more byte into a checksum value.
  */
@@ -29,8 +31,8 @@ static inline void accumulate_checksum
  */
 unsigned char calculate_checksum
 (
-    const void    *buffer, ///< Buffer to calculate checksum over.
-    unsigned long  size    ///< Buffer size.
+    const void  *buffer, ///< Buffer to calculate checksum over.
+    size_t       size    ///< Buffer size.
 );
 
 #endif /* end CHECKSUM_H_ */
