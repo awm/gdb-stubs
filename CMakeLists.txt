@@ -7,7 +7,7 @@
 #
 # @brief     Top-level CMake file for GDB Stubs.
 #
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.16)
 enable_testing()
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
@@ -17,6 +17,7 @@ project(gdb-stubs VERSION 0.1.0 LANGUAGES C)
 
 include(CTest)
 include(CheckSymbolExists)
+include(CheckTypeSize)
 
 # Test for platform features.
 check_symbol_exists(NULL    "stdlib.h" HAVE_NULL)
@@ -26,6 +27,21 @@ check_symbol_exists(memcpy  "string.h" HAVE_MEMCPY)
 check_symbol_exists(memset  "string.h" HAVE_MEMSET)
 check_symbol_exists(strlen  "string.h" HAVE_STRLEN)
 check_symbol_exists(strncmp "string.h" HAVE_STRNCMP)
+check_type_size(size_t  SIZE_T)
+
+# Set defines for detected features.
+if(HAVE_NULL)
+    add_compile_definitions(HAVE_NULL)
+endif()
+if(HAVE_ASSERT)
+    add_compile_definitions(HAVE_ASSERT)
+endif()
+if(HAVE_MEMSET)
+    add_compile_definitions(HAVE_MEMSET)
+endif()
+if(HAVE_SIZE_T)
+    add_compile_definitions(HAVE_SIZE_T)
+endif()
 
 # Turn on all warnings and treat all warnings as errors.
 set(GNU_LIKE GNU Clang AppleClang)
