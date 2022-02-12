@@ -22,7 +22,7 @@ env:
 # Run the unit test builds for each platform.
 jobs:
   unit-test:
-    name:     Unit Test (${{ runner.os }})
+    name:     Unit Test
     runs-on:  ${{ matrix.os }}
     strategy:
       matrix:
