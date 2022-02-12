@@ -1,25 +1,24 @@
 #
-# @file        desktop-unit-test.yml
-# @copyright   2022 Andrew MacIsaac
+# @file       ci.yml
+# @copyright  2022 Andrew MacIsaac
 # @remark
-#      SPDX-License-Identifier: MPL-2.0
+#   SPDX-License-Identifier: MPL-2.0
 #
-# @brief       Build and run the unit tests on the three desktop platforms.
+# @brief      Build the library for all platforms.
+#             Run the unit tests on the three desktop platforms.
 #
-name: Desktop Unit Tests
+name: Continuous Integration
 
-# Trigger normal CMake test builds for all branches on push, PR, and manual
-# trigger.
+# Trigger normal CMake test builds for all branches on push and PR.
 on:
   push:
   pull_request:
-  workflow_dispatch:
 
 env:
   # Set CMake build type.
   BUILD_TYPE: Debug
 
-# Run the unit test builds for each platform.
+# Run the builds for each platform.
 jobs:
   unit-test:
     name:     Unit Test
@@ -77,3 +76,39 @@ jobs:
             --test-action test              \
             --output-on-failure             \
             --parallel 4
+
+  bare-metal:
+    name:     Bare Metal
+    runs-on:  ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Install dependencies.
+      - name: Install APT dependencies
+        run:  sudo apt-get install -y ninja-build gcc-arm-none-eabi
+
+      # Check out the code.
+      - name: Clone ${{ github.repository }}
+        uses: actions/checkout@v2
+        with:
+          path: repo
+
+      # Create build directory.
+      - name: Create build environment
+        run:  cmake -E make_directory '${{ github.workspace }}/repo/build'
+
+      # Run CMake configuration.
+      - name:               Configure CMake
+        working-directory:  ${{ github.workspace }}/repo/build
+        run: |
+          cmake ..                              \
+            -G Ninja                            \
+            -DCMAKE_BUILD_TYPE="${BUILD_TYPE}"  \
+            -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/gcc-arm-none-eabi.cmake
+
+      # Build the library.
+      - name:               Build library
+        working-directory:  ${{ github.workspace }}/repo/build
+        run:                cmake --build . --config "${BUILD_TYPE}"
