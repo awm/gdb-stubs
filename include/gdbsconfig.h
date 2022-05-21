@@ -15,7 +15,7 @@
 #   define GDBS_PACKET_BUFFER_LENGTH 1024
 #endif
 #if GDBS_PACKET_BUFFER_LENGTH < 32
-#   error GDBS_PACKET_BUFFER_LENGTH must be >= 32
+#   error "GDBS_PACKET_BUFFER_LENGTH must be >= 32"
 #endif
 
 /// Extra declaration for packet buffer.  Set to *static* to move the packet buffer from the stack

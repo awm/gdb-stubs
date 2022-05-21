@@ -17,7 +17,9 @@ enum gdbs_error
     GDBS_ERROR_INVALID,   ///< Invalid function input.
     GDBS_ERROR_CHECKSUM,  ///< Invalid packet checksum.
     GDBS_ERROR_EOB,       ///< At the end of the buffer.
-    GDBS_ERROR_NOT_FOUND  ///< Requested item was not found.
+    GDBS_ERROR_NOT_FOUND, ///< Requested item was not found.
+
+    GDBS_ERROR_COUNT      ///< Number of error codes.  Not itself a valid error code.
 };
 
 /**

@@ -33,21 +33,16 @@ const char *gdbs_error_to_string
     int error ///< Error code to convert.
 )
 {
-    switch (error)
+    static const char *strings[GDBS_ERROR_COUNT] =
     {
-        case GDBS_ERROR_OK:
-            return "OK";
-        case GDBS_ERROR_INVALID:
-            return "invalid data or parameter";
-        case GDBS_ERROR_CHECKSUM:
-            return "invalid checksum";
-        case GDBS_ERROR_EOB:
-            return "end of buffer";
-        case GDBS_ERROR_NOT_FOUND:
-            return "item or value not found";
-    }
+        [GDBS_ERROR_OK]         = "OK",
+        [GDBS_ERROR_INVALID]    = "invalid data or parameter",
+        [GDBS_ERROR_CHECKSUM]   = "invalid checksum",
+        [GDBS_ERROR_EOB]        = "end of buffer",
+        [GDBS_ERROR_NOT_FOUND]  = "item or value not found"
+    };
 
-    return "";
+    return ((0 <= error && error < GDBS_ERROR_COUNT) ? strings[error] : "");
 }
 
 /**

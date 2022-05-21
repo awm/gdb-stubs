@@ -9,7 +9,7 @@
 #
 
 # Build products
-*-build/
+build-*/
 _build/
 build/
 
