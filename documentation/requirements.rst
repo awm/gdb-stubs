@@ -211,7 +211,7 @@ target.  At a minimum, such tests should verify the following:
 References
 ----------
 
-* `Implementing a Remote Stub <https://sourceware.org/gdb/onlinedocs/gdb/Remote-Stub.html>`_.
-* `Howto: GDB Remote Serial Protocol <https://www.embecosm.com/appnotes/ean4/embecosm-howto-rsp-server-ean4-issue-2.html>`_.
-* `avatar-gdbstub <https://github.com/avatarone/avatar-gdbstub>`_.
-* `GDB Remote Serial Protocol <https://sourceware.org/gdb/onlinedocs/gdb/Remote-Protocol.html>`_.
+ * `Implementing a Remote Stub <https://sourceware.org/gdb/onlinedocs/gdb/Remote-Stub.html>`_.
+ * `Howto: GDB Remote Serial Protocol <https://www.embecosm.com/appnotes/ean4/embecosm-howto-rsp-server-ean4-issue-2.html>`_.
+ * `avatar-gdbstub <https://github.com/avatarone/avatar-gdbstub>`_.
+ * `GDB Remote Serial Protocol <https://sourceware.org/gdb/onlinedocs/gdb/Remote-Protocol.html>`_.
