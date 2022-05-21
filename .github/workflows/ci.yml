@@ -46,7 +46,7 @@ jobs:
         run:  brew install doxygen ninja
 
       - name: Install Python dependencies
-        run:  pip install --user  \
+        run:  pip3 install --user \
                 breathe           \
                 sphinx            \
                 sphinx_rtd_theme
