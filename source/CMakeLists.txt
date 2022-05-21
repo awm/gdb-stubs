@@ -16,6 +16,7 @@ set(SRCS
     auxiliary/packet.c
     auxiliary/rle.c
     core.c
+    protocol/ack.c
 )
 
 include_directories(

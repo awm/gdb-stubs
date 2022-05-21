@@ -41,3 +41,14 @@ add_test(test_auxiliary_packet test_auxiliary_packet)
 # Test the library core.
 add_executable(test_core test_core.c)
 add_test(test_core test_core)
+
+# Test the protocol functions.
+add_executable(
+    test_protocol_ack
+    test_protocol_ack.c
+    ${CMAKE_SOURCE_DIR}/source/auxiliary/packet.c
+    ${CMAKE_SOURCE_DIR}/source/auxiliary/binary.c
+    ${CMAKE_SOURCE_DIR}/source/auxiliary/checksum.c
+    ${CMAKE_SOURCE_DIR}/source/auxiliary/hex.c
+)
+add_test(test_protocol_ack test_protocol_ack)

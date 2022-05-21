@@ -7,8 +7,11 @@
  *
  *  @brief      ACK handling for the GDB protocol.
  */
+#include "gdbsconfig.h"
+
 #include "ack.h"
 
+#include "auxiliary/packet.h"
 #include "core.h"
 #include "stdc/assert.h"
 #include "stdc/null.h"
@@ -21,7 +24,7 @@ void proto_set_ack_mode
     int enable ///< Boolean value to enable or disable ACK support.
 )
 {
-    core_get_environment()->ack_enabled = enabled;
+    core_get_environment()->ack_enabled = enable;
 }
 
 /**
@@ -36,12 +39,13 @@ static void send
     struct packet_writer    packet;
 
     assert(type != NULL);
+    assert(type[0] == 'N' || type[0] == 'A');
 
     if (core_get_environment()->ack_enabled)
     {
-        packet_writer_init(&packet, PT_ACK, GDBS_PACKET_SINK, GDBS_PACKET_SINK_PARAM);
+        packet_writer_init(&packet, PT_ACK, core_get_environment()->comm);
 
-        packet_writer_push_ack((type[0] == 'A'), &packet)
+        result = packet_writer_push_ack(&packet, (type[0] == 'A'));
         if (result == 0)
         {
             result = packet_writer_finish(&packet);
