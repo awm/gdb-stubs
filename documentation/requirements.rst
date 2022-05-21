@@ -64,127 +64,127 @@ usable.
 
 These requirements are denoted with the prefix **"T"** in ticket descriptions.
 
-  1. A GDB stub must have configurable build-time options to select features of the target system
-     and optional functionality.
+1. A GDB stub must have configurable build-time options to select features of the target system
+   and optional functionality.
 
-    1. The supported I/O interface types must be configurable.
-    2. The targeted processor and system architecture must be selectable.
-    3. Support for additional protocol message types beyond the essential functionality must be
-       configurable, if the system/port supports the necessary features.  *For example, enabling
-       shell passthrough features must be a selectable option if shell support has been added to the
-       stub feature set, and if the target supports a shell or CLI.*
+ 1. The supported I/O interface types must be configurable.
+ 2. The targeted processor and system architecture must be selectable.
+ 3. Support for additional protocol message types beyond the essential functionality must be
+    configurable, if the system/port supports the necessary features.  *For example, enabling
+    shell passthrough features must be a selectable option if shell support has been added to the
+    stub feature set, and if the target supports a shell or CLI.*
 
-  2. A GDB stub must implement a platform-agnostic core of protocol handling routines for creating
-     and interpreting GDB messages.
+2. A GDB stub must implement a platform-agnostic core of protocol handling routines for creating
+   and interpreting GDB messages.
 
-    1. A stub must support the GDB protocol message format and signalling described in section E.1
-       of the GDB manual.
+ 1. A stub must support the GDB protocol message format and signalling described in section E.1
+    of the GDB manual.
 
-      1. A stub must implement the packet format and checksum.
-      2. A stub must implement packet acknowledgements.
-      3. A stub must support the packet run-length encoding feature.
+  1. A stub must implement the packet format and checksum.
+  2. A stub must implement packet acknowledgements.
+  3. A stub must support the packet run-length encoding feature.
 
-    2. At a minimum, a stub must support the GDB protocol commands described in section E.1 of the
-       GDB manual.
+ 2. At a minimum, a stub must support the GDB protocol commands described in section E.1 of the
+    GDB manual.
 
-      1. A stub must implement the ``?`` command.
-      2. A stub must implement the ``g`` and ``G`` commands.
-      3. A stub must implement the ``m`` and ``M`` commands.
-      4. A stub must implement the ``c`` command.
-      5. A stub must implement the ``s`` command, if hardware single stepping is supported by the
-         platform.
-      6. A stub must implement the ``vCont`` command if the target is multi-threaded.
+  1. A stub must implement the ``?`` command.
+  2. A stub must implement the ``g`` and ``G`` commands.
+  3. A stub must implement the ``m`` and ``M`` commands.
+  4. A stub must implement the ``c`` command.
+  5. A stub must implement the ``s`` command, if hardware single stepping is supported by the
+     platform.
+  6. A stub must implement the ``vCont`` command if the target is multi-threaded.
 
-        1. The ``vCont?`` command must be supported.
-        2. The ``vCont;c`` command must be supported.
-        3. The ``vCont;s`` command must be supported, if hardware single stepping is supported by
-           the platform.
-        4. The ``vCont;t`` command must be supported.
+   1. The ``vCont?`` command must be supported.
+   2. The ``vCont;c`` command must be supported.
+   3. The ``vCont;s`` command must be supported, if hardware single stepping is supported by
+      the platform.
+   4. The ``vCont;t`` command must be supported.
 
-      7. A stub must support the ``k`` command.
+  7. A stub must support the ``k`` command.
 
-        1. The k command must have the effect of restarting the target.
+   1. The k command must have the effect of restarting the target.
 
-      8. A stub must support the ``qSupported`` command.
+  8. A stub must support the ``qSupported`` command.
 
-        1. The PacketSize reply to the ``qSupported`` command must be supported.
+   1. The PacketSize reply to the ``qSupported`` command must be supported.
 
-    3. A stub must support a subset of the stop reply packets described in section E.3 of the GDB
-       manual.
+ 3. A stub must support a subset of the stop reply packets described in section E.3 of the GDB
+    manual.
 
-      1. A stub must implement the ``S`` reply.
-      2. A stub must implement the ``T`` reply.
+  1. A stub must implement the ``S`` reply.
+  2. A stub must implement the ``T`` reply.
 
-    4. A stub should support some additional commands as part of the core command set.
+ 4. A stub should support some additional commands as part of the core command set.
 
-      1. A stub should implement the ``qC`` command if the target is multi-threaded.
-      2. A stub should support the ``D`` command.
-      3. A stub should support the ``qOffsets`` command.
-      4. A stub should support the ``X`` command.
-      5. A stub should support the ``qSymbol`` command.
+  1. A stub should implement the ``qC`` command if the target is multi-threaded.
+  2. A stub should support the ``D`` command.
+  3. A stub should support the ``qOffsets`` command.
+  4. A stub should support the ``X`` command.
+  5. A stub should support the ``qSymbol`` command.
 
-        1. A minimal (always OK) implementation of the ``qSymbol`` command may be provided.
+   1. A minimal (always OK) implementation of the ``qSymbol`` command may be provided.
 
-    5. A stub may provide support for additional commands as described in Appendix E of the GDB
-       manual.
+ 5. A stub may provide support for additional commands as described in Appendix E of the GDB
+    manual.
 
-      1. Additional commands must be implemented as part of the core command implementation, to make
-         them available for other platforms which might benefit from them.
+  1. Additional commands must be implemented as part of the core command implementation, to make
+     them available for other platforms which might benefit from them.
 
-        1. Additional commands must be conditionally enabled/disabled depending on the target
-           properties and configuration.
+   1. Additional commands must be conditionally enabled/disabled depending on the target
+      properties and configuration.
 
-  3. A GDB stub must provide at least one interface implementation for remote connections.
+3. A GDB stub must provide at least one interface implementation for remote connections.
 
-    1. A stub may provide an interface for remote debugging over a serial UART.
+ 1. A stub may provide an interface for remote debugging over a serial UART.
 
-      1. The serial UART selected for debugging must be configurable to the extent allowed by the
-         platform.
-      2. If a UART is to be shared with an existing feature, it may try to coexist to the extent
-         allowed by the feature.  *For example, if it coexists on a CLI port, the shell passthrough
-         features of GDB may be used to allow CLI access from within the debugging session.*
+  1. The serial UART selected for debugging must be configurable to the extent allowed by the
+     platform.
+  2. If a UART is to be shared with an existing feature, it may try to coexist to the extent
+     allowed by the feature.  *For example, if it coexists on a CLI port, the shell passthrough
+     features of GDB may be used to allow CLI access from within the debugging session.*
 
-    2. A stub may provide an interface for remote debugging over the standard C library's stdio.
+ 2. A stub may provide an interface for remote debugging over the standard C library's stdio.
 
-      1. A stub may take complete ownership of stdin and stdout if this feature is enabled.
+  1. A stub may take complete ownership of stdin and stdout if this feature is enabled.
 
-    3. A stub may provide an interface for remote debugging over TCP.
-    4. A stub must ensure that GDB message sending or receiving is still possible when the system is
-       halted for breakpoints or exceptions.
-    5. The provided interface(s) must permit receiving one character at a time into the core
-       protocol implementation for incoming protocol packets.
-    6. The provided interface(s) must permit sending one character at a time from the core protocol
-       implementation for outgoing protocol packets.
+ 3. A stub may provide an interface for remote debugging over TCP.
+ 4. A stub must ensure that GDB message sending or receiving is still possible when the system is
+    halted for breakpoints or exceptions.
+ 5. The provided interface(s) must permit receiving one character at a time into the core
+    protocol implementation for incoming protocol packets.
+ 6. The provided interface(s) must permit sending one character at a time from the core protocol
+    implementation for outgoing protocol packets.
 
-  4. The GDB stub code base must be structured so that it can easily be incorporated into the native
-     build system of the target.
+4. The GDB stub code base must be structured so that it can easily be incorporated into the native
+   build system of the target.
 
-    1. A stub must not impose a build system choice on a target, other than the general requirement
-       of a compatible C compiler and linker.
-    2. A stub must provide an entry point to be called as early as possible in the target
-       initialization process.  This will set up the necessary hooks for the debugger.
-    3. A stub may call various target-specific functions to set up the debugging environment and
-       perform I/O operations.
-    4. A stub must provide a function which can be called from the application to explicitly trigger
-       a breakpoint.
-    5. A stub must provide a function to flush the instruction cache.
+ 1. A stub must not impose a build system choice on a target, other than the general requirement
+    of a compatible C compiler and linker.
+ 2. A stub must provide an entry point to be called as early as possible in the target
+    initialization process.  This will set up the necessary hooks for the debugger.
+ 3. A stub may call various target-specific functions to set up the debugging environment and
+    perform I/O operations.
+ 4. A stub must provide a function which can be called from the application to explicitly trigger
+    a breakpoint.
+ 5. A stub must provide a function to flush the instruction cache.
 
-      1. If no instruction cache is present then the flush operation must be a no-op.
+  1. If no instruction cache is present then the flush operation must be a no-op.
 
-    6. A stub must not use third-party libraries (other than libc) for common portions of the code.
-    7. A stub may use the target's standard C library for basic C functions, if available.
+ 6. A stub must not use third-party libraries (other than libc) for common portions of the code.
+ 7. A stub may use the target's standard C library for basic C functions, if available.
 
-      1. A stub must provide minimal implementations of required standard functions if they are not
-         available on the target.
+  1. A stub must provide minimal implementations of required standard functions if they are not
+     available on the target.
 
 Expected Output Documentation
 -----------------------------
 
 These requirements are denoted with the prefix **"D"** in ticket descriptions.
 
-  1. The structure of the stub project code base must be documented.
-  2. Instructions for expanding platform support must be provided.
-  3. Instructions for expanding GDB command support should be provided.
+1. The structure of the stub project code base must be documented.
+2. Instructions for expanding platform support must be provided.
+3. Instructions for expanding GDB command support should be provided.
 
 Test Considerations
 -------------------
@@ -196,22 +196,22 @@ as expected.
 Testing of the stub as a whole will likely be done in-situ with a live GDB session on a known
 target.  At a minimum, such tests should verify the following:
 
-  * Connecting to the target.
-  * Running the target.
-  * Adding, removing, and stopping on breakpoints.
-  * Adding, removing, and stopping on watchpoints.
-  * Single stepping.
-  * Printing the contents of variables.
-  * Printing the contents of registers.
-  * Displaying a backtrace.
-  * Listing the threads and switching thread contexts while stopped (only if multi-threading is
-    supported).
-  * Resetting the target.
+* Connecting to the target.
+* Running the target.
+* Adding, removing, and stopping on breakpoints.
+* Adding, removing, and stopping on watchpoints.
+* Single stepping.
+* Printing the contents of variables.
+* Printing the contents of registers.
+* Displaying a backtrace.
+* Listing the threads and switching thread contexts while stopped (only if multi-threading is
+  supported).
+* Resetting the target.
 
 References
 ----------
 
- * `Implementing a Remote Stub <https://sourceware.org/gdb/onlinedocs/gdb/Remote-Stub.html>`_.
- * `Howto: GDB Remote Serial Protocol <https://www.embecosm.com/appnotes/ean4/embecosm-howto-rsp-server-ean4-issue-2.html>`_.
- * `avatar-gdbstub <https://github.com/avatarone/avatar-gdbstub>`_.
- * `GDB Remote Serial Protocol <https://sourceware.org/gdb/onlinedocs/gdb/Remote-Protocol.html>`_.
+* `Implementing a Remote Stub <https://sourceware.org/gdb/onlinedocs/gdb/Remote-Stub.html>`_.
+* `Howto: GDB Remote Serial Protocol <https://www.embecosm.com/appnotes/ean4/embecosm-howto-rsp-server-ean4-issue-2.html>`_.
+* `avatar-gdbstub <https://github.com/avatarone/avatar-gdbstub>`_.
+* `GDB Remote Serial Protocol <https://sourceware.org/gdb/onlinedocs/gdb/Remote-Protocol.html>`_.
