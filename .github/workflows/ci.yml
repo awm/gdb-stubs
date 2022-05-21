@@ -17,6 +17,8 @@ on:
 env:
   # Set CMake build type.
   BUILD_TYPE: Debug
+  # Build documentation as well.
+  BUILD_DOCS: 1
 
 # Run the builds for each platform.
 jobs:
@@ -37,10 +39,17 @@ jobs:
       # Install dependencies.
       - name: Install APT dependencies
         if: matrix.os == 'ubuntu-latest'
-        run:  sudo apt-get install -y ninja-build
+        run:  sudo apt-get install -y doxygen ninja-build
+
       - name: Install Homebrew dependencies
         if: matrix.os == 'macos-latest'
-        run:  brew install ninja
+        run:  brew install doxygen ninja
+
+      - name: Install Python dependencies
+        run:  pip install --user  \
+                breathe           \
+                sphinx            \
+                sphinx_rtd_theme
 
       # Check out the code.
       - name: Clone ${{ github.repository }}
@@ -56,11 +65,17 @@ jobs:
       - name:               Configure CMake
         if: matrix.os != 'windows-latest'
         working-directory:  ${{ github.workspace }}/repo/build
-        run:                cmake .. -G Ninja -DCMAKE_BUILD_TYPE="${BUILD_TYPE}"
+        run:                cmake ..                              \
+                              -G Ninja                            \
+                              -DCMAKE_BUILD_TYPE="${BUILD_TYPE}"  \
+                              -DBUILD_DOCUMENTATION=${BUILD_DOCS}
       - name:               Configure CMake
         if: matrix.os == 'windows-latest'
         working-directory:  ${{ github.workspace }}/repo/build
-        run:                cmake .. -G 'Visual Studio 16 2019' -A x64
+        run:                cmake ..                              \
+                              -G 'Visual Studio 16 2019'          \
+                              -A x64                              \
+                              -DBUILD_DOCUMENTATION=${BUILD_DOCS}
 
       # Build the library.
       - name:               Build library
