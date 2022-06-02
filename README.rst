@@ -22,7 +22,7 @@ The following tools are required or recommended for building the framework:
 * **Recommended, for host build and unit tests:**
 
  + A C99-compliant C compiler and linker for your development host.
- + CMake >= 3.19.
+ + CMake >= 3.16.
  + Ninja >= 1.8.
 
 * **Optional, for documentation generation:**

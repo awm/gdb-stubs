@@ -103,7 +103,7 @@ These requirements are denoted with the prefix **"T"** in ticket descriptions.
 
   7. A stub must support the ``k`` command.
 
-   1. The k command must have the effect of restarting the target.
+   1. The ``k`` command must have the effect of restarting the target.
 
   8. A stub must support the ``qSupported`` command.
 
@@ -130,9 +130,8 @@ These requirements are denoted with the prefix **"T"** in ticket descriptions.
 
   1. Additional commands must be implemented as part of the core command implementation, to make
      them available for other platforms which might benefit from them.
-
-   1. Additional commands must be conditionally enabled/disabled depending on the target
-      properties and configuration.
+  2. Additional commands must be conditionally enabled/disabled depending on the target
+     properties and configuration.
 
 3. A GDB stub must provide at least one interface implementation for remote connections.
 

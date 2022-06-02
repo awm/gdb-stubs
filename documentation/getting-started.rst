@@ -17,7 +17,7 @@ The following tools are required or recommended for building the framework:
 * **Recommended, for host build and unit tests:**
 
  + A C99-compliant C compiler and linker for your development host.
- + CMake >= 3.19.
+ + CMake >= 3.16.
  + Ninja >= 1.8.
 
 * **Optional, for documentation generation:**
@@ -46,7 +46,7 @@ the library:
     # Build the library
     ninja
 
-The resulting static library will be located in `build-${target}/source`.
+The resulting static library will be located in ``build-${target}/source``.
 
 Use of the CMake project is not mandatory, and if necessary the required stub code source files may
 be directly incorporated into your own project's build mechanism.
