@@ -478,6 +478,35 @@ int packet_writer_push
 }
 
 /**
+ * A buffer of bytes to the packet payload.  Only applicable for non-ack type packets.
+ *
+ * @retval 0    Bytes successfully written.
+ * @retval <0   Sending failed.  The exact value will be a negative enum gdbs_error entry indicating
+ *              what went wrong.
+ */
+int packet_writer_push_buffer
+(
+    struct packet_writer    *packet,    ///< Packet writer instance.
+    const unsigned char     *bytes,     ///< Bytea to write out.
+    size_t                   length     ///< Number of bytes in the buffer.
+)
+{
+    int     result = GDBS_ERROR_OK;
+    size_t  i;
+
+    for (i = 0; i < length; ++i)
+    {
+        result = packet_writer_push(packet, bytes[i]);
+        if (result != GDBS_ERROR_OK)
+        {
+            break;
+        }
+    }
+
+    return result;
+}
+
+/**
  * Finish writing out a packet.
  *
  * @retval 0    Packet completely written out successfully.
