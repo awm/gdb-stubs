@@ -13,7 +13,7 @@
 #include "tap.h"
 
 //                                      TTT TEPC   TV  TPT TPWPA TPWP  TPR
-static const unsigned long TEST_COUNT = 256 +  7 + 17 + 69 +   6 + 87 + 36;
+static const unsigned long TEST_COUNT = 256 +  7 + 17 + 69 +   6 + 90 + 36;
 
 static void test_to_type(void)
 {
@@ -567,6 +567,17 @@ static void test_packet_writer_push(void)
                 sizeof(packet)) == 0,
         "Composed packet: '%s'",
         packet);
+
+    buf = TB_INIT(packet);
+    packet_writer_init(&writer, PT_MESSAGE, &buf);
+    TAP_OK(
+        packet_writer_push_buffer(
+            &writer,
+            (const unsigned char *) "vCont;c;s;t", strlen("vCont;c;s;t")) == 0,
+            "Push buffer");
+    TAP_OK(packet_writer_finish(&writer) == 0, "Complete packet");
+    TAP_OK(strncmp(packet, "$vCont;c;s;t#05", sizeof(packet)) == 0, "Composed packet: '%s'",
+                                                                    packet);
 }
 
 int gdbs_receive
